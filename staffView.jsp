@@ -2,32 +2,31 @@
 	<html>
 
 	<head>
-		<title>Clinic Master (Patient)</title>
+		<title>Clinic Master (Staff)</title>
 	</head>
 
 	<body>
-		<h1>Clinic Master (Patient)</h1>
-		<h2>Add Patient</h2>
+		<h1>Clinic Master (Staff)</h1>
+		<h2>Add Staff</h2>
 		<form>
 			<input type = "text" name = "name" id = "name" placeholder = "Name" size = "50">
 			<br>
 			<input type = "text" name = "age" id = "age" placeholder = "Age" size = "50">
 			<br>
-			<input type = "text" name = "address" id = "address" placeholder = "Address" size = "50">
+			<input type = "text" name = "job" id = "job" placeholder = "Job" size = "50">
 			<br>
-			<input type = "text" name = "billingCard" id = "billingCard" placeholder = "Billing Card" size = "50">
+			<input type = "text" name = "salary" id = "salary" placeholder = "Salary" size = "50">
 			<br>
 			<input type = "submit" value = "Add Patient to System">
 		</form>
-		<h2>View/Edit Patients</h2>
+		<h2>View/Edit Staff</h2>
 		<table border="1">
 			<tr>
-				<td>Patient ID</td>
+				<td>Staff ID</td>
 				<td>Name</td>
 				<td>Age</td>
-				<td>Address</td>
-				<td>Billing Card</td>
-				<td>Balance</td>
+				<td>Job</td>
+				<td>Salary</td>
 			</tr>
 			<% 
 			String db="clinicmaster"; 
