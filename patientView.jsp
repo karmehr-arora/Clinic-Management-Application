@@ -8,8 +8,8 @@
 	<body>
 		<nav>
 			<ul>
-				<li><a href="/patientView.jsp">Patient</a></li>
-				<li><a href="/staffView.jsp">Staff</a></li>
+				<li><a href="/CS157A-Team1/patientView.jsp">Patient</a></li>
+				<li><a href="/CS157A-Team1/staffView.jsp">Staff</a></li>
 			</ul>
 		</nav>
 		<h1>Clinic Master (Patient)</h1>
@@ -26,6 +26,36 @@
 			<input type = "submit" value = "Add Patient to System">
 		</form>
 		<h2>View/Edit Patients</h2>
+		<table border="1">
+			<tr>
+				<td>Appointment ID</td>
+				<td>Doctor</td>
+				<td>Date</td>
+				<td>Time</td>
+			</tr>
+		</table>
+		<h2>Book Appointment</h2>
+		<form>
+			<input type = "text" name = "patientID" id = "paitientID" placeholder = "Patient ID" size = "50">
+			<br>
+			<input type = "text" name = "service" id = "service" placeholder = "Service" size = "50">
+			<br>
+			<input type = "text" name = "staffID" id = "staffID" placeholder = "Staff ID" size = "50">
+			<br>
+			<input type = "text" name = "room" id = "room" placeholder = "Room" size = "50">
+			<br>
+			<input type = "datetime-local" name = "appointmentDate" id = "appointmentDate" placeholder = "Choose Appointment Date" size = "50">
+			<br>
+			<input type = "submit" value = "Check Availability">
+			<input type = "submit" value = "Book Appointment">
+		</form>
+		<h2>View Appointment for specific patient</h2>
+		<form>
+			<input type = "text" name = "patientID" id = "paitientID" placeholder = "Patient ID" size = "50">
+			<br>
+			<input type = "submit" value = "See Appointments">
+		</form>
+
 		<table border="1">
 			<tr>
 				<td>Patient ID</td>
@@ -57,6 +87,8 @@
 				out.println("SQLException caught: " + e.getMessage());
 			}
 			%>
+		</table>
+
 	</body>
 
 	</html>

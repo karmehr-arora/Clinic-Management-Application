@@ -8,8 +8,8 @@
 	<body>
 		<nav>
 			<ul>
-				<li><a href="/patientView.jsp">Patient</a></li>
-				<li><a href="/staffView.jsp">Staff</a></li>
+				<li><a href="/CS157A-Team1/patientView.jsp">Patient</a></li>
+				<li><a href="/CS157A-Team1/staffView.jsp">Staff</a></li>
 			</ul>
 		</nav>
 		<h1>Clinic Master (Staff)</h1>
@@ -56,6 +56,18 @@
 				out.println("SQLException caught: " + e.getMessage());
 			}
 			%>
+		</table>
+		<h2>Add Services</h2>
+		<form>
+			<input type = "text" name = "serviceName" id = "serviceName" placeholder = "Service Name" size = "50">
+			<br>
+			<input type = "text" name = "cost" id = "cost" placeholder = "Cost" size = "50">
+			<br>
+			<input type = "text" name = "serviceDepartment" id = "serviceDepartment" placeholder = "Service Department" size = "50">
+			<br>
+			<input type = "submit" value = "Add Service">
+		</form>
+
 	</body>
 
 	</html>
