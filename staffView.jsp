@@ -6,6 +6,12 @@
 	</head>
 
 	<body>
+		<nav>
+			<ul>
+				<li><a href="/patientView.jsp">Patient</a></li>
+				<li><a href="/staffView.jsp">Staff</a></li>
+			</ul>
+		</nav>
 		<h1>Clinic Master (Staff)</h1>
 		<h2>Add Staff</h2>
 		<form>
