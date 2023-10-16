@@ -25,37 +25,7 @@
 			<br>
 			<input type = "submit" value = "Add Patient to System">
 		</form>
-		<h2>View/Edit Patients</h2>
-		<table border="1">
-			<tr>
-				<td>Appointment ID</td>
-				<td>Doctor</td>
-				<td>Date</td>
-				<td>Time</td>
-			</tr>
-		</table>
-		<h2>Book Appointment</h2>
-		<form>
-			<input type = "text" name = "patientID" id = "paitientID" placeholder = "Patient ID" size = "50">
-			<br>
-			<input type = "text" name = "service" id = "service" placeholder = "Service" size = "50">
-			<br>
-			<input type = "text" name = "staffID" id = "staffID" placeholder = "Staff ID" size = "50">
-			<br>
-			<input type = "text" name = "room" id = "room" placeholder = "Room" size = "50">
-			<br>
-			<input type = "datetime-local" name = "appointmentDate" id = "appointmentDate" placeholder = "Choose Appointment Date" size = "50">
-			<br>
-			<input type = "submit" value = "Check Availability">
-			<input type = "submit" value = "Book Appointment">
-		</form>
-		<h2>View Appointment for specific patient</h2>
-		<form>
-			<input type = "text" name = "patientID" id = "paitientID" placeholder = "Patient ID" size = "50">
-			<br>
-			<input type = "submit" value = "See Appointments">
-		</form>
-
+		<h2>View/Edit Staff</h2>
 		<table border="1">
 			<tr>
 				<td>Patient ID</td>
@@ -88,6 +58,36 @@
 			}
 			%>
 		</table>
+		<h2>Book Appointment</h2>
+		<form>
+			<input type = "text" name = "patientID" id = "paitientID" placeholder = "Patient ID" size = "50">
+			<br>
+			<input type = "text" name = "service" id = "service" placeholder = "Service" size = "50">
+			<br>
+			<input type = "text" name = "staffID" id = "staffID" placeholder = "Staff ID" size = "50">
+			<br>
+			<input type = "text" name = "room" id = "room" placeholder = "Room" size = "50">
+			<br>
+			<input type = "datetime-local" name = "appointmentDate" id = "appointmentDate" placeholder = "Choose Appointment Date" size = "50">
+			<br>
+			<input type = "submit" value = "Check Availability">
+			<input type = "submit" value = "Book Appointment">
+		</form>
+		<h2>View Appointment for specific patient</h2>
+		<form>
+			<input type = "text" name = "patientID" id = "paitientID" placeholder = "Patient ID" size = "50">
+			<br>
+			<input type = "submit" value = "See Appointments">
+		</form>
+		<table border="1">
+			<tr>
+				<td>Appointment ID</td>
+				<td>Doctor</td>
+				<td>Date</td>
+				<td>Time</td>
+			</tr>
+		</table>
+
 
 	</body>
 
