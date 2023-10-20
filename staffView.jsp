@@ -66,16 +66,15 @@
 						<% 
 						String db="clinicmaster"; 
 						String user; // assumes database name is the same as username 
-						user=""; 
-						String password=""; 
-						try { 
+						user="root"; 
+						String password = "root";						try { 
 							java.sql.Connection con; Class.forName("com.mysql.jdbc.Driver");
 							con=DriverManager.getConnection("jdbc:mysql://localhost/" + db, user, password); 
 							out.println(db + " database successfully opened.<br/><br/>" ); out.println("Initial entries in table \"Student\": <br />");
 							Statement stmt = con.createStatement();
-							ResultSet rs = stmt.executeQuery("SELECT * FROM Student");
+							ResultSet rs = stmt.executeQuery("SELECT *  FROM staff");
 							while (rs.next()) {
-								out.println(rs.getInt(1) + " " + rs.getString(2) + " " + rs.getString(3) + "<br /><br />");
+								out.println(rs.getInt(1) + " " + rs.getString(2) + " " + rs.getInt(3) + " " + rs.getString(4) + " " + rs.getInt(5) + "<br /><br />");
 							}
 							rs.close();
 							stmt.close();
