@@ -30,9 +30,9 @@
 		<h1>Clinic Master (Staff)</h1>
 		<nav>
 			<ul>
-				<li><a href="/CS157A-Team1/patientView.jsp">Patient</a></li>
-				<li><a href="/CS157A-Team1/staffView.jsp">Staff</a></li>
-				<li><a href="/CS157A-Team1/staffView.jsp">Services</a></li>
+				<li><a href="/patientView.jsp">Patient</a></li>
+				<li><a href="/staffView.jsp">Staff</a></li>
+				<li><a href="/staffView.jsp">Services</a></li>
 			</ul>
 		</nav>
 		<div class="horizontal-headers">
@@ -70,7 +70,7 @@
 						String password = "root";						try { 
 							java.sql.Connection con; Class.forName("com.mysql.jdbc.Driver");
 							con=DriverManager.getConnection("jdbc:mysql://localhost/" + db, user, password); 
-							out.println(db + " database successfully opened.<br/><br/>" ); out.println("Initial entries in table \"Student\": <br />");
+							out.println(db + " database successfully opened.<br/><br/>" ); out.println("Initial entries in table \"staff\": <br />");
 							Statement stmt = con.createStatement();
 							ResultSet rs = stmt.executeQuery("SELECT *  FROM staff");
 							while (rs.next()) {
