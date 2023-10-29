@@ -34,26 +34,29 @@
 				<td>Address</td>
 				<td>Billing Card</td>
 				<td>Balance</td>
-			</tr>
+			</tr>		
 			<% 
 			String db="clinicmaster"; 
 			String user; // assumes database name is the same as username 
-          	user = "root";
-        	String password = "root";
-			try { 
-				java.sql.Connection con; Class.forName("com.mysql.jdbc.Driver");
+          	user = "hello";
+        	String password = "Hello123!";
+			try 
+			{ 
+				java.sql.Connection con; 
+				Class.forName("com.mysql.jdbc.Driver");
 				con=DriverManager.getConnection("jdbc:mysql://localhost/" + db, user, password); 
-				out.println(db + " database successfully opened.<br/><br/>" ); out.println("Initial entries in table \"Patient\": <br />");
 				Statement stmt = con.createStatement();
 				ResultSet rs = stmt.executeQuery("SELECT * FROM patient");
-				while (rs.next()) {
-					out.println(rs.getInt(1) + "\t" + rs.getString(2) + "     " + rs.getInt(3) + "     " + rs.getString(4) + "     " + rs.getInt(5) + "     " + rs.getInt(6) + "<br /><br />");
+				while (rs.next()) 
+				{
+					out.println("<tr><td>" + rs.getInt(1) + "</td><td>" + rs.getString(2) + "</td><td>" + rs.getInt(3) + "</td><td>" + rs.getString(4) + "</td><td>" + rs.getInt(5) + "</td><td>" + rs.getInt(6) + "</td></tr>");
 				}
 				rs.close();
 				stmt.close();
 				con.close();
 			} 
-			catch(SQLException e) {
+			catch(SQLException e) 
+			{
 				out.println("SQLException caught: " + e.getMessage());
 			}
 			%>
