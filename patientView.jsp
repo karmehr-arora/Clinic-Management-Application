@@ -14,17 +14,38 @@
 		</nav>
 		<h1>Clinic Master (Patient)</h1>
 		<h2>Add Patient</h2>
-		<form>
-			<input type = "text" name = "name" id = "name" placeholder = "Name" size = "50">
+		<form action = "patientView.jsp" method = "GET">
+			<input type = "text" name = "name" placeholder = "Name" size = "50">
 			<br>
-			<input type = "text" name = "age" id = "age" placeholder = "Age" size = "50">
+			<input type = "text" name = "age" placeholder = "Age" size = "50">
 			<br>
-			<input type = "text" name = "address" id = "address" placeholder = "Address" size = "50">
+			<input type = "text" name = "address" placeholder = "Address" size = "50">
 			<br>
-			<input type = "text" name = "billingCard" id = "billingCard" placeholder = "Billing Card" size = "50">
+			<input type = "text" name = "billingCard" placeholder = "Billing Card" size = "50">
 			<br>
 			<input type = "submit" value = "Add Patient to System">
 		</form>
+		<%
+		String db="clinicmaster"; 
+		String user; // assumes database name is the same as username 
+		  user = "hello";
+		String password = "Hello123!";
+		try 
+		{ 
+			java.sql.Connection con; 
+			Class.forName("com.mysql.jdbc.Driver");
+			con=DriverManager.getConnection("jdbc:mysql://localhost/" + db, user, password); 
+			Statement stmt = con.createStatement();
+			String sql = String.format("INSERT INTO patient(name, age, address, billingCard, balance) VALUES('%s', %s, '%s',%s,%s)",request.getParameter("name"),request.getParameter("age"),request.getParameter("address"),request.getParameter("billingCard"),"0");
+			stmt.executeUpdate(sql);		
+			stmt.close();
+			con.close();
+		} 
+		catch(SQLException e) 
+		{
+			out.println("SQLException caught: " + e.getMessage());
+		}
+		%>
 		<h2>View/Edit Staff</h2>
 		<table border="1">
 			<tr>
@@ -36,10 +57,6 @@
 				<td>Balance</td>
 			</tr>		
 			<% 
-			String db="clinicmaster"; 
-			String user; // assumes database name is the same as username 
-          	user = "hello";
-        	String password = "Hello123!";
 			try 
 			{ 
 				java.sql.Connection con; 
