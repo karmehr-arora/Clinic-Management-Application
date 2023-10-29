@@ -30,9 +30,9 @@
 		<h1>Clinic Master (Staff)</h1>
 		<nav>
 			<ul>
-				<li><a href="/patientView.jsp">Patient</a></li>
-				<li><a href="/staffView.jsp">Staff</a></li>
-				<li><a href="/staffView.jsp">Services</a></li>
+				<li><a href="./patientView.jsp">Patient</a></li>
+				<li><a href="./staffView.jsp">Staff</a></li>
+				<li><a href="./staffView.jsp">Services</a></li>
 			</ul>
 		</nav>
 		<div class="horizontal-headers">
