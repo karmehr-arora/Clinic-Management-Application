@@ -23,12 +23,11 @@ DROP TABLE IF EXISTS `appointments`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `appointments` (
-  `appointmentID` int NOT NULL,
-  `doctor` varchar(45) DEFAULT NULL,
+  `appointmentID` int NOT NULL AUTO_INCREMENT,
   `time` varchar(45) DEFAULT NULL,
   `date` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`appointmentID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -37,7 +36,7 @@ CREATE TABLE `appointments` (
 
 LOCK TABLES `appointments` WRITE;
 /*!40000 ALTER TABLE `appointments` DISABLE KEYS */;
-INSERT INTO `appointments` VALUES (1,'Anthony','12:00PM','10/12/2023'),(2,'Karmehr','1:00PM','10/11/2023'),(3,'Phillip','2:00PM','10/10/2023'),(4,'Derrick','3:00PM','10/13/2023'),(5,'Tyler','4:00PM','10/14/2023'),(6,'Matthew','5:00PM','10/15/2023'),(7,'Geronimo','6:00PM','10/16/2023'),(8,'Austin','7:00PM','10/17/2023'),(9,'Kean','8:00PM','10/18/2023'),(10,'Sam','9:00PM','10/19/2023');
+INSERT INTO `appointments` VALUES (1,'12:00PM','10/12/2023'),(2,'1:00PM','10/11/2023'),(3,'2:00PM','10/10/2023'),(4,'3:00PM','10/13/2023'),(5,'4:00PM','10/14/2023'),(6,'5:00PM','10/15/2023'),(7,'6:00PM','10/16/2023'),(8,'7:00PM','10/17/2023'),(9,'8:00PM','10/18/2023'),(10,'9:00PM','10/19/2023');
 /*!40000 ALTER TABLE `appointments` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -51,8 +50,7 @@ DROP TABLE IF EXISTS `attends`;
 CREATE TABLE `attends` (
   `appointmentID` int NOT NULL,
   `staffID` int NOT NULL,
-  `patientID` int NOT NULL,
-  PRIMARY KEY (`appointmentID`,`staffID`,`patientID`)
+  `patientID` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -76,8 +74,7 @@ DROP TABLE IF EXISTS `consistsof`;
 CREATE TABLE `consistsof` (
   `appointmentID` int NOT NULL,
   `serviceName` varchar(45) NOT NULL,
-  `serviceDescription` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`appointmentID`,`serviceName`)
+  `serviceDescription` varchar(45) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -175,8 +172,7 @@ DROP TABLE IF EXISTS `has`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `has` (
   `roomNumber` int NOT NULL,
-  `appointmentID` int NOT NULL,
-  PRIMARY KEY (`roomNumber`,`appointmentID`)
+  `appointmentID` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -255,7 +251,7 @@ CREATE TABLE `patient` (
   `billingCard` int DEFAULT NULL,
   `balance` int DEFAULT NULL,
   PRIMARY KEY (`patientID`)
-) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=47 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -264,7 +260,7 @@ CREATE TABLE `patient` (
 
 LOCK TABLES `patient` WRITE;
 /*!40000 ALTER TABLE `patient` DISABLE KEYS */;
-INSERT INTO `patient` VALUES (1,'Anthony',20,'123 Blvd',500,1000),(2,'Karmehr',21,'321 Steet',1000,2000),(3,'Phillip',22,'456 Avenue',1500,3000),(4,'Derrick',23,'789 Lane',2000,4000),(5,'Tyler',24,'987 Blvd',2500,5000),(6,'Matthew',25,'123 Steret',3000,6000),(7,'Geronimo',26,'654 Avenue',3500,7000),(8,'Austin',27,'987 Lane',4000,8000),(9,'Sam',28,'789 Blvd',4500,9000),(10,'Kean',29,'912 Rd',5000,10000),(26,'qwefqwef',123,'qwefq',2134,0),(27,'qwefqwef',123,'qwefq',2134,0),(28,'qwefqwef',123,'qwefq',2134,0),(29,'qwefqwef',123,'qwefq',2134,0),(30,'qwefqwef',123,'qwefq',2134,0);
+INSERT INTO `patient` VALUES (1,'Anthony',20,'123 Blvd',500,1000),(2,'Karmehr',21,'321 Steet',1000,2000),(3,'Phillip',22,'456 Avenue',1500,3000),(4,'Derrick',23,'789 Lane',2000,4000),(5,'Tyler',24,'987 Blvd',2500,5000),(6,'Matthew',25,'123 Steret',3000,6000),(7,'Geronimo',26,'654 Avenue',3500,7000),(8,'Austin',27,'987 Lane',4000,8000),(9,'Sam',28,'789 Blvd',4500,9000),(10,'Kean',29,'912 Rd',5000,10000),(26,'qwefqwef',123,'qwefq',2134,0),(27,'qwefqwef',123,'qwefq',2134,0),(28,'qwefqwef',123,'qwefq',2134,0),(29,'qwefqwef',123,'qwefq',2134,0),(30,'qwefqwef',123,'qwefq',2134,0),(31,'qwefqwef',123,'qwefq',2134,0),(32,'qwefqwef',123,'qwefq',2134,0),(33,'qwefqwef',123,'qwefq',2134,0),(34,'qwefqwef',123,'qwefq',2134,0),(35,'qwefqwef',123,'qwefq',2134,0),(36,'qwefqwef',123,'qwefq',2134,0),(37,'qwefqwef',123,'qwefq',2134,0),(38,'qwefqwef',123,'qwefq',2134,0),(39,'ewfq',123,'wefq123',123,0),(40,'first',123,'first',456,0),(41,'first',123,'first',456,0),(42,'first',123,'first',456,0),(43,'first',123,'first',456,0),(44,'null',NULL,'null',NULL,0),(45,'null',NULL,'null',NULL,0),(46,'null',NULL,'null',NULL,0);
 /*!40000 ALTER TABLE `patient` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -380,4 +376,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-10-29 16:25:06
+-- Dump completed on 2023-10-29 19:05:08
