@@ -33,6 +33,7 @@
 				<li><a href="./patientView.jsp">Patient</a></li>
 				<li><a href="./staffView.jsp">Staff</a></li>
 				<li><a href="./staffView.jsp">Services</a></li>
+				<li><a href="./appointment.jsp">Appointment</a></li>
 			</ul>
 		</nav>
 		<div class="horizontal-headers">
