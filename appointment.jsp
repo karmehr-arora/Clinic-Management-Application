@@ -18,7 +18,9 @@
 		<form action="appointment.jsp" method="GET">
 			<input type = "text" name = "patientID" placeholder = "Patient ID" size = "50">
 			<br>
-			<input type = "text" name = "service" placeholder = "Service" size = "50">
+			<input type = "text" name = "serviceName" placeholder = "Service Name" size = "50">
+			<br>
+			<input type = "text" name = "serviceDescription" placeholder = "Service Description" size = "50">
 			<br>
 			<input type = "text" name = "staffID" placeholder = "Staff ID" size = "50">
 			<br>
@@ -40,8 +42,26 @@
 			Class.forName("com.mysql.jdbc.Driver");
 			con=DriverManager.getConnection("jdbc:mysql://localhost/" + db, user, password); 
 			Statement stmt = con.createStatement();
-			//String sql = String.format("INSERT INTO appointment(time, date) VALUES('%s','%s')",request.getParameter("date"),request.getParameter("time"));
-			stmt.executeUpdate(sql);		
+			String sql = String.format("INSERT INTO appointments(time, date) VALUES('%s','%s')",request.getParameter("date"),request.getParameter("time"));
+			//out.println(sql + "<br>");
+            stmt.executeUpdate(sql);	
+            
+            sql = "SELECT appointmentID FROM appointments ORDER BY appointmentID DESC LIMIT 1";
+            ResultSet rs = stmt.executeQuery(sql);
+			rs.next();
+            //out.println(rs.getString(1) + "<br>");
+			String appointmentID = rs.getString(1);
+
+			sql = String.format("INSERT INTO attends(appointmentID, staffID, patientID) VALUES(%s,%s,%s)",appointmentID, request.getParameter("patientID"),request.getParameter("staffID"));
+			//out.println(sql + "<br>");
+            stmt.executeUpdate(sql);	
+			sql = String.format("INSERT INTO has(appointmentID, roomNumber) VALUES(%s,%s)",appointmentID, request.getParameter("room"));
+			//out.println(sql + "<br>");
+            stmt.executeUpdate(sql);	            	
+			sql = String.format("INSERT INTO consistsof(appointmentID, serviceName, serviceDescription) VALUES(%s,'%s','%s')", appointmentID,request.getParameter("serviceName"), request.getParameter("serviceDescription"));
+			//out.println(sql + "<br>");
+            stmt.executeUpdate(sql);	 
+			rs.close();           	
 			stmt.close();
 			con.close();
 		} 
