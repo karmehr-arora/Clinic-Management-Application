@@ -5,17 +5,36 @@
 		<link href="css/bootstrap.min.css" rel="stylesheet"/>
 	</head>
 	<body>
-		<nav>
-			<ul>
-				<li><a href="./patientView.jsp">Patient</a></li>
-				<li><a href="./staffView.jsp">Staff</a></li>
-				<li><a href="./appointment.jsp">Appointment</a></li>
-			</ul>
+		<nav class="navbar navbar-expand-lg bg-body-tertiary">
+			<div class="container-fluid">
+			  <a class="navbar-brand" href="#">Clinic Master</a>
+			  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			  </button>
+			  <div class="collapse navbar-collapse" id="navbarText">
+				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+				  <li class="nav-item">
+					<a class="nav-link" href="#">Home</a>
+				  </li>
+				  <li class="nav-item">
+					<a class="nav-link active" aria-current="page" href="./patientView.jsp">Patient</a>
+				  </li>
+				  <li class="nav-item">
+					<a class="nav-link" href="./staffView.jsp">Staff</a>
+				  </li>
+				  <li class="nav-item">
+					<a class="nav-link" href="./appointment.jsp">Appointment</a>
+				  </li>
+				</ul>
+				<span class="navbar-text">
+				  Patient Page
+				</span>
+			  </div>
+			</div>
 		</nav>
-		<h1>Clinic Master (Patient)</h1>
-		<h2>Add Patient</h2>
-		<div class="container d-flex justify-content-center align-items-center bg-primary-subtle w-50 h-50">
+		<div class="container d-flex justify-content-center align-items-center bg-primary-subtle card p-3">
 			<form action = "patientView.jsp" method = "GET">
+				<h2>Add Patient</h2>
 				<div class="mb-3">
 					<input type = "text" class = "form-control" name = "name" placeholder = "Name" size = "50">
 				</div>
@@ -31,6 +50,7 @@
 				<input type = "submit" class="btn btn-primary" value = "Add Patient to System">
 			</form>
 		</div>
+		<br>
 		<%
 		String db="clinicmaster"; 
 		String user; // assumes database name is the same as username 
@@ -52,37 +72,44 @@
 			out.println("SQLException caught: " + e.getMessage());
 		}
 		%>
-		<h2>View/Edit Staff</h2>
-		<table border="1">
-			<tr>
-				<td>Patient ID</td>
-				<td>Name</td>
-				<td>Age</td>
-				<td>Address</td>
-				<td>Billing Card</td>
-				<td>Balance</td>
-			</tr>		
-			<% 
-			try 
-			{ 
-				java.sql.Connection con; 
-				Class.forName("com.mysql.jdbc.Driver");
-				con=DriverManager.getConnection("jdbc:mysql://localhost/" + db, user, password); 
-				Statement stmt = con.createStatement();
-				ResultSet rs = stmt.executeQuery("SELECT * FROM patient");
-				while (rs.next()) 
+		<div class = "container d-flex justify-content-center align-items-center bg-primary-subtle card p-3">
+			<h2>View/Edit Patient</h2>
+			<table class="table table-bordered">
+				<thead>
+				<tr>
+					<th scope="col">Patient ID</th>
+					<th scope="col">Name</th>
+					<th scope="col">Age</th>
+					<th scope="col">Address</th>
+					<th scope="col">Billing Card</th>
+					<th scope="col">Balance</th>
+					<th scope="col">Edit</th>
+				</tr>
+				</thead>
+				<tbody>
+				<% 
+				try 
+				{ 
+					java.sql.Connection con; 
+					Class.forName("com.mysql.jdbc.Driver");
+					con=DriverManager.getConnection("jdbc:mysql://localhost/" + db, user, password); 
+					Statement stmt = con.createStatement();
+					ResultSet rs = stmt.executeQuery("SELECT * FROM patient");
+					while (rs.next()) 
+					{
+						out.println("<tr><td>" + rs.getInt(1) + "</td><td>" + rs.getString(2) + "</td><td>" + rs.getInt(3) + "</td><td>" + rs.getString(4) + "</td><td>" + rs.getInt(5) + "</td><td>" + rs.getInt(6) + "</td><td><button type='button' class='btn btn-primary'>Delete</button></td></tr>");
+					}
+					rs.close();
+					stmt.close();
+					con.close();
+				} 
+				catch(SQLException e) 
 				{
-					out.println("<tr><td>" + rs.getInt(1) + "</td><td>" + rs.getString(2) + "</td><td>" + rs.getInt(3) + "</td><td>" + rs.getString(4) + "</td><td>" + rs.getInt(5) + "</td><td>" + rs.getInt(6) + "</td></tr>");
+					out.println("SQLException caught: " + e.getMessage());
 				}
-				rs.close();
-				stmt.close();
-				con.close();
-			} 
-			catch(SQLException e) 
-			{
-				out.println("SQLException caught: " + e.getMessage());
-			}
-			%>
-		</table>
+				%>
+				</tbody>
+			</table>
+		</div>
 	</body>
 	</html>
