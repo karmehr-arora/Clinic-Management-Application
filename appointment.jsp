@@ -65,32 +65,35 @@
 		String password = "Hello123!";
 		try 
 		{ 
-			java.sql.Connection con; 
-			Class.forName("com.mysql.jdbc.Driver");
-			con=DriverManager.getConnection("jdbc:mysql://localhost/" + db, user, password); 
-			Statement stmt = con.createStatement();
-			String sql = String.format("INSERT INTO appointments(time, date) VALUES('%s','%s')",request.getParameter("date"),request.getParameter("time"));
-			//out.println(sql + "<br>");
-            stmt.executeUpdate(sql);	
-            
-            sql = "SELECT appointmentID FROM appointments ORDER BY appointmentID DESC LIMIT 1";
-            ResultSet rs = stmt.executeQuery(sql);
-			rs.next();
-            //out.println(rs.getString(1) + "<br>");
-			String appointmentID = rs.getString(1);
+			if(request.getParameter("date") != null)
+			{
+				java.sql.Connection con; 
+				Class.forName("com.mysql.jdbc.Driver");
+				con = DriverManager.getConnection("jdbc:mysql://localhost/" + db, user, password); 
+				Statement stmt = con.createStatement();
+				String sql = String.format("INSERT INTO appointments(time, date) VALUES('%s','%s')",request.getParameter("date"),request.getParameter("time"));
+				//out.println(sql + "<br>");
+				stmt.executeUpdate(sql);	
+				
+				sql = "SELECT appointmentID FROM appointments ORDER BY appointmentID DESC LIMIT 1";
+				ResultSet rs = stmt.executeQuery(sql);
+				rs.next();
+				//out.println(rs.getString(1) + "<br>");
+				String appointmentID = rs.getString(1);
 
-			sql = String.format("INSERT INTO attends(appointmentID, staffID, patientID) VALUES(%s,%s,%s)",appointmentID, request.getParameter("patientID"),request.getParameter("staffID"));
-			//out.println(sql + "<br>");
-            stmt.executeUpdate(sql);	
-			sql = String.format("INSERT INTO has(appointmentID, roomNumber) VALUES(%s,%s)",appointmentID, request.getParameter("room"));
-			//out.println(sql + "<br>");
-            stmt.executeUpdate(sql);	            	
-			sql = String.format("INSERT INTO consistsof(appointmentID, serviceName, serviceDescription) VALUES(%s,'%s','%s')", appointmentID,request.getParameter("serviceName"), request.getParameter("serviceDescription"));
-			//out.println(sql + "<br>");
-            stmt.executeUpdate(sql);	 
-			rs.close();           	
-			stmt.close();
-			con.close();
+				sql = String.format("INSERT INTO attends(appointmentID, staffID, patientID) VALUES(%s,%s,%s)",appointmentID, request.getParameter("patientID"),request.getParameter("staffID"));
+				//out.println(sql + "<br>");
+				stmt.executeUpdate(sql);	
+				sql = String.format("INSERT INTO has(appointmentID, roomNumber) VALUES(%s,%s)",appointmentID, request.getParameter("room"));
+				//out.println(sql + "<br>");
+				stmt.executeUpdate(sql);	            	
+				sql = String.format("INSERT INTO consistsof(appointmentID, serviceName, serviceDescription) VALUES(%s,'%s','%s')", appointmentID,request.getParameter("serviceName"), request.getParameter("serviceDescription"));
+				//out.println(sql + "<br>");
+				stmt.executeUpdate(sql);	 
+				rs.close();           	
+				stmt.close();
+				con.close();
+			}
 		} 
 		catch(SQLException e) 
 		{
@@ -110,6 +113,11 @@
 				<thead>
 				<tr>
 					<th scope="col">Appointment ID</th>
+					<th scope="col">Patient ID</th>
+					<th scope="col">Staff ID</th>
+					<th scope="col">Service Name</th>
+					<th scope="col">Service Description</th>
+					<th scope="col">Room</th>
 					<th scope="col">Date</th>
 					<th scope="col">Time</th>
 				</tr>
@@ -121,13 +129,18 @@
 						java.sql.Connection con; 
 						Class.forName("com.mysql.jdbc.Driver");
 						con=DriverManager.getConnection("jdbc:mysql://localhost/" + db, user, password); 
-						Statement stmt = con.createStatement();
-						ResultSet rs = stmt.executeQuery("SELECT * FROM appointments");
-						while (rs.next()) {
-							out.println("<tr><td>"+rs.getInt(1) + "</td><td>" + rs.getString(2) + "</td><td>" + rs.getString(3) + "</td></tr>");
+						Statement stmt1 = con.createStatement();
+						ResultSet rs1 = stmt1.executeQuery("SELECT * FROM appointments");
+						while (rs1.next()) {
+							Statement stmt2 = con.createStatement();
+							ResultSet rs2 = stmt2.executeQuery("SELECT patientID, staffID FROM attends WHERE appointmentID=" + rs1.getInt(1));
+							rs2.next();
+							out.println(rs.getInt(1));
+							out.println("<tr><td>"+rs1.getInt(1) + "</td><td>" + rs1.getString(2) + "</td><td>" + rs1.getString(3) + "</td><td>" + rs2.getInt(0) + "</td><td>" + rs2.getInt(1) + "</td></tr>");
+							
 						}
-						rs.close();
-						stmt.close();
+						rs1.close();
+						stmt1.close();
 						con.close();
 					} 
 					catch(SQLException e) 

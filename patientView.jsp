@@ -58,14 +58,17 @@
 		String password = "Hello123!";
 		try 
 		{ 
-			java.sql.Connection con; 
-			Class.forName("com.mysql.jdbc.Driver");
-			con=DriverManager.getConnection("jdbc:mysql://localhost/" + db, user, password); 
-			Statement stmt = con.createStatement();
-			String sql = String.format("INSERT INTO patient(name, age, address, billingCard, balance) VALUES('%s', %s, '%s',%s,%s)",request.getParameter("name"),request.getParameter("age"),request.getParameter("address"),request.getParameter("billingCard"),"0");
-			stmt.executeUpdate(sql);		
-			stmt.close();
-			con.close();
+			if(request.getParameter("name") != null && request.getParameter("age")!= null && request.getParameter("address") != null&& request.getParameter("billingCard") != null)
+			{
+				java.sql.Connection con; 
+				Class.forName("com.mysql.jdbc.Driver");
+				con=DriverManager.getConnection("jdbc:mysql://localhost/" + db, user, password); 
+				Statement stmt = con.createStatement();
+				String sql = String.format("INSERT INTO patient(name, age, address, billingCard, balance) VALUES('%s', %s, '%s',%s,%s)",request.getParameter("name"),request.getParameter("age"),request.getParameter("address"),request.getParameter("billingCard"),"0");
+				stmt.executeUpdate(sql);		
+				stmt.close();
+				con.close();
+			}
 		} 
 		catch(SQLException e) 
 		{
