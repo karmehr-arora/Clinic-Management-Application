@@ -1,10 +1,8 @@
 <%@ page import="java.sql.*" %>
 	<html>
-
 	<head>
 		<title>Clinic Master (Appointment)</title>
 	</head>
-
 	<body>
 		<nav>
 			<ul>

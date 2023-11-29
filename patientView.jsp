@@ -1,10 +1,9 @@
 <%@ page import="java.sql.*" %>
 	<html>
-
 	<head>
 		<title>Clinic Master (Patient)</title>
+		<link href="css/bootstrap.min.css" rel="stylesheet"/>
 	</head>
-
 	<body>
 		<nav>
 			<ul>
@@ -15,17 +14,23 @@
 		</nav>
 		<h1>Clinic Master (Patient)</h1>
 		<h2>Add Patient</h2>
-		<form action = "patientView.jsp" method = "GET">
-			<input type = "text" name = "name" placeholder = "Name" size = "50">
-			<br>
-			<input type = "text" name = "age" placeholder = "Age" size = "50">
-			<br>
-			<input type = "text" name = "address" placeholder = "Address" size = "50">
-			<br>
-			<input type = "text" name = "billingCard" placeholder = "Billing Card" size = "50">
-			<br>
-			<input type = "submit" value = "Add Patient to System">
-		</form>
+		<div class="container d-flex justify-content-center align-items-center bg-primary-subtle w-50 h-50">
+			<form action = "patientView.jsp" method = "GET">
+				<div class="mb-3">
+					<input type = "text" class = "form-control" name = "name" placeholder = "Name" size = "50">
+				</div>
+				<div class="mb-3">
+					<input type = "text" class = "form-control" name = "age" placeholder = "Age" size = "50">
+				</div>
+				<div class="mb-3">
+					<input type = "text" class = "form-control" name = "address" placeholder = "Address" size = "50">
+				</div>
+				<div class="mb-3">
+					<input type = "text" class = "form-control" name = "billingCard" placeholder = "Billing Card" size = "50">
+				</div>
+				<input type = "submit" class="btn btn-primary" value = "Add Patient to System">
+			</form>
+		</div>
 		<%
 		String db="clinicmaster"; 
 		String user; // assumes database name is the same as username 
