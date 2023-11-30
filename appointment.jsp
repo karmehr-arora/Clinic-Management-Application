@@ -65,31 +65,25 @@
 		String password = "Hello123!";
 		try 
 		{ 
-			if(request.getParameter("date") != null)
+			if(request.getParameter("date") != null && request.getParameter("date") != null && request.getParameter("time") != null)
 			{
 				java.sql.Connection con; 
 				Class.forName("com.mysql.jdbc.Driver");
 				con = DriverManager.getConnection("jdbc:mysql://localhost/" + db, user, password); 
 				Statement stmt = con.createStatement();
 				String sql = String.format("INSERT INTO appointments(time, date) VALUES('%s','%s')",request.getParameter("date"),request.getParameter("time"));
-				//out.println(sql + "<br>");
 				stmt.executeUpdate(sql);	
-				
 				sql = "SELECT appointmentID FROM appointments ORDER BY appointmentID DESC LIMIT 1";
 				ResultSet rs = stmt.executeQuery(sql);
 				rs.next();
-				//out.println(rs.getString(1) + "<br>");
 				String appointmentID = rs.getString(1);
-
-				sql = String.format("INSERT INTO attends(appointmentID, staffID, patientID) VALUES(%s,%s,%s)",appointmentID, request.getParameter("patientID"),request.getParameter("staffID"));
-				//out.println(sql + "<br>");
-				stmt.executeUpdate(sql);	
 				sql = String.format("INSERT INTO has(appointmentID, roomNumber) VALUES(%s,%s)",appointmentID, request.getParameter("room"));
-				//out.println(sql + "<br>");
 				stmt.executeUpdate(sql);	            	
 				sql = String.format("INSERT INTO consistsof(appointmentID, serviceName, serviceDescription) VALUES(%s,'%s','%s')", appointmentID,request.getParameter("serviceName"), request.getParameter("serviceDescription"));
-				//out.println(sql + "<br>");
-				stmt.executeUpdate(sql);	 
+				stmt.executeUpdate(sql);
+				sql = String.format("INSERT INTO attends(appointmentID, patientID, staffID) VALUES(%s,%s,%s)",appointmentID, request.getParameter("patientID"),request.getParameter("staffID"));
+				stmt.executeUpdate(sql);	
+	 
 				rs.close();           	
 				stmt.close();
 				con.close();
@@ -120,6 +114,7 @@
 					<th scope="col">Room</th>
 					<th scope="col">Date</th>
 					<th scope="col">Time</th>
+					<th scope="col">Cancel</th>
 				</tr>
 				</thead>
 				<tbody>
@@ -132,14 +127,19 @@
 						Statement stmt1 = con.createStatement();
 						ResultSet rs1 = stmt1.executeQuery("SELECT * FROM appointments");
 						while (rs1.next()) {
+							out.println(rs1.getInt(1));
 							Statement stmt2 = con.createStatement();
 							ResultSet rs2 = stmt2.executeQuery("SELECT patientID, staffID FROM attends WHERE appointmentID=" + rs1.getInt(1));
+							Statement stmt3 = con.createStatement();
+							ResultSet rs3 = stmt3.executeQuery("SELECT serviceName, serviceDescription FROM consistsof WHERE appointmentID=" + rs1.getInt(1));
+							Statement stmt4 = con.createStatement();
+							ResultSet rs4 = stmt4.executeQuery("SELECT roomNumber FROM has WHERE appointmentID=" + rs1.getInt(1));
 							rs2.next();
-							out.println(rs.getInt(1));
-							out.println("<tr><td>"+rs1.getInt(1) + "</td><td>" + rs1.getString(2) + "</td><td>" + rs1.getString(3) + "</td><td>" + rs2.getInt(0) + "</td><td>" + rs2.getInt(1) + "</td></tr>");
+							rs3.next();
+							rs4.next();
+							out.println("<tr><td>"+rs1.getInt(1) + "</td><td>" + rs2.getInt(1) + "</td><td>" + rs2.getInt(2) + "</td><td>" + rs3.getString(1) + "</td><td>" + rs3.getString(2) + "</td><td>" + rs4.getInt(1) + "</td><td>" + rs1.getString(2) + "</td><td>" + rs1.getString(3) + "</td>" + "<td><button type='button' class='btn btn-primary'>Delete</button></td></tr>");
 							
 						}
-						rs1.close();
 						stmt1.close();
 						con.close();
 					} 

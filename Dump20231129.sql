@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 8.0.34, for Linux (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.35, for Linux (x86_64)
 --
 -- Host: 127.0.0.1    Database: clinicmaster
 -- ------------------------------------------------------
--- Server version	8.0.34-0ubuntu0.22.04.1
+-- Server version	8.0.35-0ubuntu0.22.04.1
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -27,7 +27,7 @@ CREATE TABLE `appointments` (
   `time` varchar(45) DEFAULT NULL,
   `date` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`appointmentID`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=129 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -36,7 +36,7 @@ CREATE TABLE `appointments` (
 
 LOCK TABLES `appointments` WRITE;
 /*!40000 ALTER TABLE `appointments` DISABLE KEYS */;
-INSERT INTO `appointments` VALUES (1,'12:00PM','10/12/2023'),(2,'1:00PM','10/11/2023'),(3,'2:00PM','10/10/2023'),(4,'3:00PM','10/13/2023'),(5,'4:00PM','10/14/2023'),(6,'5:00PM','10/15/2023'),(7,'6:00PM','10/16/2023'),(8,'7:00PM','10/17/2023'),(9,'8:00PM','10/18/2023'),(10,'9:00PM','10/19/2023');
+INSERT INTO `appointments` VALUES (110,'2024-12-12','12:12'),(111,'2024-12-12','12:12'),(112,'2024-12-12','12:12'),(113,'2024-12-12','12:12'),(114,'2024-12-12','22:22'),(115,'2024-12-12','22:22'),(116,'2024-12-12','22:22'),(117,'2024-12-12','22:22'),(118,'2024-12-12','22:22'),(119,'2024-12-12','22:22'),(120,'2024-12-12','22:22'),(121,'2024-12-12','22:22'),(122,'2024-12-12','22:22'),(123,'2024-12-12','22:22'),(124,'2024-12-12','22:22'),(125,'2024-12-12','22:22'),(126,'2024-12-12','22:22'),(127,'2024-12-12','22:22'),(128,'2024-12-12','22:22');
 /*!40000 ALTER TABLE `appointments` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -50,7 +50,13 @@ DROP TABLE IF EXISTS `attends`;
 CREATE TABLE `attends` (
   `appointmentID` int NOT NULL,
   `staffID` int NOT NULL,
-  `patientID` int NOT NULL
+  `patientID` int NOT NULL,
+  KEY `patient_idx` (`patientID`),
+  KEY `fk_attends_2_idx` (`appointmentID`),
+  KEY `fk_attends_3_idx` (`staffID`),
+  CONSTRAINT `fk_attends_1` FOREIGN KEY (`patientID`) REFERENCES `patient` (`patientID`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `fk_attends_2` FOREIGN KEY (`appointmentID`) REFERENCES `appointments` (`appointmentID`),
+  CONSTRAINT `fk_attends_3` FOREIGN KEY (`staffID`) REFERENCES `staff` (`staffID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -60,7 +66,7 @@ CREATE TABLE `attends` (
 
 LOCK TABLES `attends` WRITE;
 /*!40000 ALTER TABLE `attends` DISABLE KEYS */;
-INSERT INTO `attends` VALUES (100,10,1),(200,20,2),(300,30,3),(400,40,4),(500,50,5),(600,60,6),(700,70,7),(800,80,8),(900,90,9),(1000,10,10);
+INSERT INTO `attends` VALUES (126,12345,1),(127,12345,1),(128,12345,1);
 /*!40000 ALTER TABLE `attends` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -74,7 +80,11 @@ DROP TABLE IF EXISTS `consistsof`;
 CREATE TABLE `consistsof` (
   `appointmentID` int NOT NULL,
   `serviceName` varchar(45) NOT NULL,
-  `serviceDescription` varchar(45) DEFAULT NULL
+  `serviceDescription` varchar(45) DEFAULT NULL,
+  KEY `fk_consistsof_1_idx` (`appointmentID`),
+  KEY `fk_consistsof_2_idx` (`serviceName`),
+  CONSTRAINT `fk_consistsof_1` FOREIGN KEY (`appointmentID`) REFERENCES `appointments` (`appointmentID`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `fk_consistsof_2` FOREIGN KEY (`serviceName`) REFERENCES `services` (`serviceName`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -84,7 +94,7 @@ CREATE TABLE `consistsof` (
 
 LOCK TABLES `consistsof` WRITE;
 /*!40000 ALTER TABLE `consistsof` DISABLE KEYS */;
-INSERT INTO `consistsof` VALUES (1,'Cancer Care','Caring for Cancer patients'),(2,'Cardiovascular','Heart and Blood inspection'),(3,'Diagnostic Information','Dietary advice and guidance'),(4,'Emergency Service','Emergency care for hurt patients'),(5,'Laboratory','Research of medication'),(6,'Disease Research','Research of diseases and their cause'),(7,'Surgery','Surgery on patients'),(8,'Mental Heatlh','Mental Health care for patients'),(9,'Rehab','Mental/Physical rehabilitation of patients'),(10,'Maternity','Child birth information and guidance');
+INSERT INTO `consistsof` VALUES (126,'Cancer Care','asldkfja'),(127,'Cancer Care','asldkfja'),(128,'Cancer Care','asldkfja');
 /*!40000 ALTER TABLE `consistsof` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -172,7 +182,11 @@ DROP TABLE IF EXISTS `has`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `has` (
   `roomNumber` int NOT NULL,
-  `appointmentID` int NOT NULL
+  `appointmentID` int NOT NULL,
+  KEY `fk_has_1_idx` (`appointmentID`),
+  KEY `fk_has_2_idx` (`roomNumber`),
+  CONSTRAINT `fk_has_1` FOREIGN KEY (`appointmentID`) REFERENCES `appointments` (`appointmentID`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `fk_has_2` FOREIGN KEY (`roomNumber`) REFERENCES `room` (`roomNumber`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -182,7 +196,7 @@ CREATE TABLE `has` (
 
 LOCK TABLES `has` WRITE;
 /*!40000 ALTER TABLE `has` DISABLE KEYS */;
-INSERT INTO `has` VALUES (101,1),(202,2),(303,3),(404,4),(505,5),(606,6),(707,7),(808,8),(909,9),(1001,10);
+INSERT INTO `has` VALUES (100,126),(100,127),(100,128);
 /*!40000 ALTER TABLE `has` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -251,7 +265,7 @@ CREATE TABLE `patient` (
   `billingCard` int DEFAULT NULL,
   `balance` int DEFAULT NULL,
   PRIMARY KEY (`patientID`)
-) ENGINE=InnoDB AUTO_INCREMENT=47 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=124 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -260,7 +274,7 @@ CREATE TABLE `patient` (
 
 LOCK TABLES `patient` WRITE;
 /*!40000 ALTER TABLE `patient` DISABLE KEYS */;
-INSERT INTO `patient` VALUES (1,'Anthony',20,'123 Blvd',500,1000),(2,'Karmehr',21,'321 Steet',1000,2000),(3,'Phillip',22,'456 Avenue',1500,3000),(4,'Derrick',23,'789 Lane',2000,4000),(5,'Tyler',24,'987 Blvd',2500,5000),(6,'Matthew',25,'123 Steret',3000,6000),(7,'Geronimo',26,'654 Avenue',3500,7000),(8,'Austin',27,'987 Lane',4000,8000),(9,'Sam',28,'789 Blvd',4500,9000),(10,'Kean',29,'912 Rd',5000,10000),(26,'qwefqwef',123,'qwefq',2134,0),(27,'qwefqwef',123,'qwefq',2134,0),(28,'qwefqwef',123,'qwefq',2134,0),(29,'qwefqwef',123,'qwefq',2134,0),(30,'qwefqwef',123,'qwefq',2134,0),(31,'qwefqwef',123,'qwefq',2134,0),(32,'qwefqwef',123,'qwefq',2134,0),(33,'qwefqwef',123,'qwefq',2134,0),(34,'qwefqwef',123,'qwefq',2134,0),(35,'qwefqwef',123,'qwefq',2134,0),(36,'qwefqwef',123,'qwefq',2134,0),(37,'qwefqwef',123,'qwefq',2134,0),(38,'qwefqwef',123,'qwefq',2134,0),(39,'ewfq',123,'wefq123',123,0),(40,'first',123,'first',456,0),(41,'first',123,'first',456,0),(42,'first',123,'first',456,0),(43,'first',123,'first',456,0),(44,'null',NULL,'null',NULL,0),(45,'null',NULL,'null',NULL,0),(46,'null',NULL,'null',NULL,0);
+INSERT INTO `patient` VALUES (1,'Anthony',20,'123 Blvd',500,1000),(2,'Karmehr',21,'321 Steet',1000,2000),(3,'Phillip',22,'456 Avenue',1500,3000),(4,'Derrick',23,'789 Lane',2000,4000),(5,'Tyler',24,'987 Blvd',2500,5000),(6,'Matthew',25,'123 Steret',3000,6000),(7,'Geronimo',26,'654 Avenue',3500,7000),(8,'Austin',27,'987 Lane',4000,8000),(9,'Sam',28,'789 Blvd',4500,9000),(10,'Kean',29,'912 Rd',5000,10000);
 /*!40000 ALTER TABLE `patient` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -286,7 +300,7 @@ CREATE TABLE `room` (
 
 LOCK TABLES `room` WRITE;
 /*!40000 ALTER TABLE `room` DISABLE KEYS */;
-INSERT INTO `room` VALUES (101,1,'Checkup',10),(202,2,'Surgery',20),(303,3,'Emergency Room',30),(404,4,'Lobby',40),(505,5,'Laboratory',50),(606,6,'Rehabilitation',60),(707,7,'Mental Health ',70),(808,8,'Cancer Research',80),(909,9,'Intensive Care Unit',90),(1000,10,'Dietary Research',100);
+INSERT INTO `room` VALUES (100,7,'Wing',100),(200,2,'Checkup',10),(300,2,'Surgery',20),(400,3,'Emergency Room',30),(500,4,'Lobby',40),(600,5,'Laboratory',50),(700,6,'Rehabilitation',60),(800,7,'Mental Health ',70),(900,8,'Cancer Research',80),(1000,9,'Intensive Care Unit',90),(1100,10,'Dietary Research',100);
 /*!40000 ALTER TABLE `room` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -353,7 +367,8 @@ CREATE TABLE `takescareof` (
   `patientID` int NOT NULL,
   `staffID` int NOT NULL,
   `patientMedicalInfo` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`patientID`,`staffID`)
+  PRIMARY KEY (`patientID`,`staffID`),
+  CONSTRAINT `patientid` FOREIGN KEY (`patientID`) REFERENCES `patient` (`patientID`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -376,4 +391,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-10-29 19:05:08
+-- Dump completed on 2023-11-29 19:24:02

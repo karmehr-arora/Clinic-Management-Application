@@ -69,6 +69,17 @@
 				stmt.close();
 				con.close();
 			}
+			else if(request.getParameter("patientID") != null)
+			{
+				java.sql.Connection con; 
+				Class.forName("com.mysql.jdbc.Driver");
+				con=DriverManager.getConnection("jdbc:mysql://localhost/" + db, user, password); 
+				Statement stmt = con.createStatement();
+				String sql = String.format("DELETE FROM patient WHERE patientID ="+ request.getParameter("patientID"));
+				stmt.executeUpdate(sql);		
+				stmt.close();
+				con.close();
+			}
 		} 
 		catch(SQLException e) 
 		{
@@ -86,7 +97,7 @@
 					<th scope="col">Address</th>
 					<th scope="col">Billing Card</th>
 					<th scope="col">Balance</th>
-					<th scope="col">Edit</th>
+					<th scope="col">Delete</th>
 				</tr>
 				</thead>
 				<tbody>
@@ -100,7 +111,7 @@
 					ResultSet rs = stmt.executeQuery("SELECT * FROM patient");
 					while (rs.next()) 
 					{
-						out.println("<tr><td>" + rs.getInt(1) + "</td><td>" + rs.getString(2) + "</td><td>" + rs.getInt(3) + "</td><td>" + rs.getString(4) + "</td><td>" + rs.getInt(5) + "</td><td>" + rs.getInt(6) + "</td><td><button type='button' class='btn btn-primary'>Delete</button></td></tr>");
+						out.println("<tr><td>" + rs.getInt(1) + "</td><td>" + rs.getString(2) + "</td><td>" + rs.getInt(3) + "</td><td>" + rs.getString(4) + "</td><td>" + rs.getInt(5) + "</td><td>" + rs.getInt(6) + "</td><td><form action = 'patientView.jsp' method = 'GET'><input type='submit' class = 'btn btn-primary' name = 'delete_user' value = 'Delete'/><input type='hidden' name = 'patientID' value = "+rs.getInt(1)+ "></form></td></tr>");
 					}
 					rs.close();
 					stmt.close();
