@@ -88,6 +88,18 @@
 				stmt.close();
 				con.close();
 			}
+			else if(request.getParameter("appointmentID") != null)
+			{
+				java.sql.Connection con; 
+				Class.forName("com.mysql.jdbc.Driver");
+				con=DriverManager.getConnection("jdbc:mysql://localhost/" + db, user, password); 
+				Statement stmt = con.createStatement();
+				String sql = String.format("DELETE FROM appointments WHERE appointmentID ="+ request.getParameter("appointmentID"));
+				stmt.executeUpdate(sql);		
+				stmt.close();
+				con.close();
+			}
+
 		} 
 		catch(SQLException e) 
 		{
@@ -127,7 +139,6 @@
 						Statement stmt1 = con.createStatement();
 						ResultSet rs1 = stmt1.executeQuery("SELECT * FROM appointments");
 						while (rs1.next()) {
-							out.println(rs1.getInt(1));
 							Statement stmt2 = con.createStatement();
 							ResultSet rs2 = stmt2.executeQuery("SELECT patientID, staffID FROM attends WHERE appointmentID=" + rs1.getInt(1));
 							Statement stmt3 = con.createStatement();
@@ -137,7 +148,7 @@
 							rs2.next();
 							rs3.next();
 							rs4.next();
-							out.println("<tr><td>"+rs1.getInt(1) + "</td><td>" + rs2.getInt(1) + "</td><td>" + rs2.getInt(2) + "</td><td>" + rs3.getString(1) + "</td><td>" + rs3.getString(2) + "</td><td>" + rs4.getInt(1) + "</td><td>" + rs1.getString(2) + "</td><td>" + rs1.getString(3) + "</td>" + "<td><button type='button' class='btn btn-primary'>Delete</button></td></tr>");
+							out.println("<tr><td>"+rs1.getInt(1) + "</td><td>" + rs2.getInt(1) + "</td><td>" + rs2.getInt(2) + "</td><td>" + rs3.getString(1) + "</td><td>" + rs3.getString(2) + "</td><td>" + rs4.getInt(1) + "</td><td>" + rs1.getString(2) + "</td><td>" + rs1.getString(3) + "</td>" + "<td><form action = 'appointment.jsp' method = 'GET'><input type='submit' class = 'btn btn-primary' name = 'delete_user' value = 'Delete'/><input type='hidden' name = 'appointmentID' value = "+rs1.getInt(1)+"></form></tr>");
 							
 						}
 						stmt1.close();

@@ -36,7 +36,7 @@ CREATE TABLE `appointments` (
 
 LOCK TABLES `appointments` WRITE;
 /*!40000 ALTER TABLE `appointments` DISABLE KEYS */;
-INSERT INTO `appointments` VALUES (110,'2024-12-12','12:12'),(111,'2024-12-12','12:12'),(112,'2024-12-12','12:12'),(113,'2024-12-12','12:12'),(114,'2024-12-12','22:22'),(115,'2024-12-12','22:22'),(116,'2024-12-12','22:22'),(117,'2024-12-12','22:22'),(118,'2024-12-12','22:22'),(119,'2024-12-12','22:22'),(120,'2024-12-12','22:22'),(121,'2024-12-12','22:22'),(122,'2024-12-12','22:22'),(123,'2024-12-12','22:22'),(124,'2024-12-12','22:22'),(125,'2024-12-12','22:22'),(126,'2024-12-12','22:22'),(127,'2024-12-12','22:22'),(128,'2024-12-12','22:22');
+INSERT INTO `appointments` VALUES (128,'2024-12-12','22:22');
 /*!40000 ALTER TABLE `appointments` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -55,7 +55,7 @@ CREATE TABLE `attends` (
   KEY `fk_attends_2_idx` (`appointmentID`),
   KEY `fk_attends_3_idx` (`staffID`),
   CONSTRAINT `fk_attends_1` FOREIGN KEY (`patientID`) REFERENCES `patient` (`patientID`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `fk_attends_2` FOREIGN KEY (`appointmentID`) REFERENCES `appointments` (`appointmentID`),
+  CONSTRAINT `fk_attends_2` FOREIGN KEY (`appointmentID`) REFERENCES `appointments` (`appointmentID`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `fk_attends_3` FOREIGN KEY (`staffID`) REFERENCES `staff` (`staffID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -66,7 +66,7 @@ CREATE TABLE `attends` (
 
 LOCK TABLES `attends` WRITE;
 /*!40000 ALTER TABLE `attends` DISABLE KEYS */;
-INSERT INTO `attends` VALUES (126,12345,1),(127,12345,1),(128,12345,1);
+INSERT INTO `attends` VALUES (128,12345,1);
 /*!40000 ALTER TABLE `attends` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -94,7 +94,7 @@ CREATE TABLE `consistsof` (
 
 LOCK TABLES `consistsof` WRITE;
 /*!40000 ALTER TABLE `consistsof` DISABLE KEYS */;
-INSERT INTO `consistsof` VALUES (126,'Cancer Care','asldkfja'),(127,'Cancer Care','asldkfja'),(128,'Cancer Care','asldkfja');
+INSERT INTO `consistsof` VALUES (128,'Cancer Care','asldkfja');
 /*!40000 ALTER TABLE `consistsof` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -196,7 +196,7 @@ CREATE TABLE `has` (
 
 LOCK TABLES `has` WRITE;
 /*!40000 ALTER TABLE `has` DISABLE KEYS */;
-INSERT INTO `has` VALUES (100,126),(100,127),(100,128);
+INSERT INTO `has` VALUES (100,128);
 /*!40000 ALTER TABLE `has` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -391,4 +391,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-11-29 19:24:02
+-- Dump completed on 2023-11-29 19:46:09
