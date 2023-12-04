@@ -26,6 +26,10 @@ DROP TABLE IF EXISTS `login`;
 CREATE TABLE `login` (
   `userID` varchar(45) NOT NULL,
   `password` varchar(45) NOT NULL,
+  `age` int NOT NULL,
+  `firstName` varchar(45) NOT NULL,
+  `lastName` varchar(45) NOT NULL,
+  `address` varchar(45) NOT NULL,
   `securityClearance` int NOT NULL DEFAULT 1,
   PRIMARY KEY (`userID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -36,10 +40,9 @@ CREATE TABLE `login` (
 --
 LOCK TABLES `login` WRITE;
 /*!40000 ALTER TABLE `login` DISABLE KEYS */;
-INSERT INTO `login` VALUES ('admin', '12345', 1);
+INSERT INTO `login` VALUES ('admin@gmail.com', '12345678', 21, 'Karmehr', 'Arora', '12345 dreary lane', 1);
 /*!40000 ALTER TABLE `login` ENABLE KEYS */;
 UNLOCK TABLES;
-
 --
 -- Table structure for table `appointments`
 --

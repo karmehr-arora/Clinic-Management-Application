@@ -7,20 +7,20 @@
 	<body>
 		<nav class="navbar navbar-expand-lg bg-body-tertiary">
 			<div class="container-fluid">
-                <a class="navbar-brand" href="homePage.jsp">Clinic Master</a>
+                <a class="navbar-brand" href="loginPage.jsp">Clinic Master</a>
 			  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
 			  </button>
 			  <div class="collapse navbar-collapse" id="navbarText">
 				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 				  <li class="nav-item">
-					<a class="nav-link" href="./patientView.jsp">Patient</a>
+					<!-- <a class="nav-link" href="./patientView.jsp">Patient</a> -->
 				  </li>
 				  <li class="nav-item">
-					<a class="nav-link" href="./staffView.jsp">Staff</a>
+					<!-- <a class="nav-link" href="./staffView.jsp">Staff</a> -->
 				  </li>
 				  <li class="nav-item">
-					<a class="nav-link" href="./appointment.jsp">Appointment</a>
+					<!-- <a class="nav-link" href="./appointment.jsp">Appointment</a> -->
 				  </li>
 				</ul>
 
@@ -41,13 +41,13 @@
             <div class="row justify-content-center">
                 <div class="col-md-6">
                     <h2>Login</h2>
-                    <form action="processLogin.jsp" method="post">
+                    <form method="post">
                         <div class="mb-3">
-                            <label for="username" class="form-label">Username</label>
+                            <label for="username" class="form-label">Email</label>
                             <input type="text" class="form-control" id="username" name="username" required>
                         </div>
                         <div class="mb-3">
-                            <label for="password" class="form-label">Password</label>
+                            <label for="password" class="form-label">Password (+8 Characters)</label>
                             <input type="password" class="form-control" id="password" name="password" required>
                         </div>
                         <button type="submit" class="btn btn-primary">Login</button>
@@ -62,25 +62,28 @@
 							// Checking to see if password & username are valid
 							if(request.getParameter("username") != null && request.getParameter("password") != null) {
 								try { 
+									// Creating Connection
 									java.sql.Connection connection; 
 									Class.forName("com.mysql.jdbc.Driver");
 									connection=DriverManager.getConnection("jdbc:mysql://localhost/" + db, user, password); 
-									// out.println(db + " database successfully opened.<br/><br/>" ); 
-									// out.println("Initial entries in table \"staff\": <br />");
+									
+									//Creating and executing sql statement
 									String sql = "SELECT * FROM login WHERE '" + request.getParameter("username") + "' IN (SELECT UserID FROM login) AND '" + request.getParameter("password") + "' IN (SELECT password FROM login);";
 									Statement stmt = connection.createStatement();
 									ResultSet rs = stmt.executeQuery(sql);
 			
-									String testUser = "1", testPass = "2";
-									rs.next();
-									testUser = rs.getString(1);
-									testPass = rs.getString(2);
-									out.println(testUser + "<br/><br/>" + testPass);
-									if(testUser.equals(request.getParameter("username")) && testPass.equals(request.getParameter("password"))){
-										out.println("nice");
+									// saving user input and testing for validity
+									String testUser = "", testPass = "";
+									if (rs.isBeforeFirst() ) {    
+										rs.next();
+										testUser = rs.getString(1);
+										testPass = rs.getString(2);
+									} // checking user authentication
+									boolean passLen = (request.getParameter("password").toString().length() >= 8);
+									if(testUser.equals(request.getParameter("username")) && testPass.equals(request.getParameter("password")) && passLen){
+										response.sendRedirect("homePage.jsp");
 									} else{
-										out.println("Invalid Username or Password <br/><br/> Please try again<br/><br/>");
-										//out.println(request.getParameter("username") + "<br/><br/>" + request.getParameter("password"));
+										out.println("Invalid Username or Password");
 									}
 									rs.close();
 									stmt.close();
