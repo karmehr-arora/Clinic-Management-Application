@@ -68,6 +68,45 @@
                         </div>
                         <button type="submit" class="btn btn-primary">Sign Up</button>
                     </form>
+					<form class="form-container">
+						<%  
+							// Setting variables db, user, root, & password
+							String db="clinicmaster"; 
+							String user; // assumes database name is the same as username 
+							user = "root"; // default database name
+							String password = "!Nf4@$TrnK7uR3";
+			
+							// Checking to see if password & username are valid
+							if(request.getParameter("username") != null && request.getParameter("password") != null) {
+								try { 
+									java.sql.Connection connection; 
+									Class.forName("com.mysql.jdbc.Driver");
+									connection=DriverManager.getConnection("jdbc:mysql://localhost/" + db, user, password); 
+									// out.println(db + " database successfully opened.<br/><br/>" ); 
+									// out.println("Initial entries in table \"staff\": <br />");
+									String sql = "SELECT * FROM login WHERE '" + request.getParameter("username") + "' IN (SELECT UserID FROM login) AND '" + request.getParameter("password") + "' IN (SELECT password FROM login);";
+									Statement stmt = connection.createStatement();
+									ResultSet rs = stmt.executeQuery(sql);
+			
+									String testUser = "1", testPass = "2";
+									rs.next();
+									testUser = rs.getString(1);
+									testPass = rs.getString(2);
+									out.println(testUser + "<br/><br/>" + testPass);
+									if(testUser.equals(request.getParameter("username")) && testPass.equals(request.getParameter("password"))){
+										out.println("nice");
+									} else{
+										out.println("Invalid Username or Password <br/><br/> Please try again<br/><br/>");
+										//out.println(request.getParameter("username") + "<br/><br/>" + request.getParameter("password"));
+									}
+									rs.close();
+									stmt.close();
+									connection.close();
+								} catch(SQLException e) {
+									out.println("SQLException caught: " + e.getMessage());
+								}
+							}
+						%>
                 </div>
             </div>
         </div>
