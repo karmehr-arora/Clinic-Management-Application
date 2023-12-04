@@ -18,7 +18,7 @@
 --
 -- Table structure for table `appointments`
 --
-
+UNLOCK TABLES;
 DROP TABLE IF EXISTS `appointments`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
@@ -33,10 +33,13 @@ CREATE TABLE `appointments` (
 --
 -- Dumping data for table `appointments`
 --
-
 LOCK TABLES `appointments` WRITE;
 /*!40000 ALTER TABLE `appointments` DISABLE KEYS */;
-INSERT INTO `appointments` VALUES (128,'2024-12-12','22:22');
+INSERT INTO `appointments` VALUES (1, '2024-1-12', '22:22'), (2, '2024-2-13', '09:00'), 
+(3, '2024-4-14', '14:30'), (4, '2024-4-15', '17:45'), (5, '2024-6-16', '11:20'),
+(6, '2024-10-17', '08:15'), (7, '2024-5-18', '16:00'), (8, '2024-6-19', '10:45'),
+(9, '2024-11-20', '13:00'), (10, '2024-12-21', '19:30'), (11, '2024-1-22', '15:10'),
+(12, '2024-3-23', '12:40'), (13, '2024-5-24', '20:00'), (14, '2024-1-25', '09:30'), (15, '2023-2-15', '10:15');
 /*!40000 ALTER TABLE `appointments` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -66,7 +69,7 @@ CREATE TABLE `attends` (
 
 LOCK TABLES `attends` WRITE;
 /*!40000 ALTER TABLE `attends` DISABLE KEYS */;
-INSERT INTO `attends` VALUES (128,12345,1);
+INSERT INTO `attends` VALUES (1,12345,1);
 /*!40000 ALTER TABLE `attends` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -325,7 +328,10 @@ CREATE TABLE `services` (
 
 LOCK TABLES `services` WRITE;
 /*!40000 ALTER TABLE `services` DISABLE KEYS */;
-INSERT INTO `services` VALUES ('Cancer Care',8000,'Laboratory'),('Cardiovascular ',7000,'Cardiology'),('Diagnostic Imaging',3000,'Laboratory'),('Emergency Medical',1000,'Intensive Care Unit'),('Laboratory',4000,'Laboratory'),('Maternity and Obstetrics',5000,'Obstetrics'),('Mental Health',10000,'Neurology'),('Pediatric ',6000,'Pediatrics'),('Rehabilitation ',9000,'Cardiology'),('Surgery',2000,'Anesthesia');
+INSERT INTO `services` VALUES ('Cancer Care',8000,'Laboratory'),('Cardiovascular ',7000,'Cardiology'),('Diagnostic Imaging',3000,'Laboratory'),
+('Emergency Medical',1000,'Intensive Care Unit'),('Laboratory',4000,'Laboratory'),('Maternity and Obstetrics',5000,'Obstetrics'),
+('Mental Health',10000,'Neurology'),('Pediatric ',6000,'Pediatrics'),('Rehabilitation ',9000,'Cardiology'),('Surgery',2000,'Anesthesia'),
+('Therapy',5000,'Neurology'),('Preventative Care',100,'Pediatrics'),('Surgery ',90000,'Surgery'),('Immunology',2000,'Internal Medicine'), ('Oncology',2000,'Cancer Treatment');
 /*!40000 ALTER TABLE `services` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -352,7 +358,11 @@ CREATE TABLE `staff` (
 
 LOCK TABLES `staff` WRITE;
 /*!40000 ALTER TABLE `staff` DISABLE KEYS */;
-INSERT INTO `staff` VALUES (12345,'Anthony',20,'Physician',10000),(19876,'Karmehr',29,'Nurse',100000),(21543,'Phillip',24,'Surgeon',50000),(32145,'Derrick',22,'Pharmacist',30000),(51234,'Tyler',25,'Anesthesiologist',60000),(52134,'Matthew',26,'Physical Therapist',70000),(53124,'Geronimo',27,'Dietitian',80000),(54123,'Austin',23,'Medical Biller',40000),(54321,'Sam',21,'Medical Records Clerk',20000),(67890,'Kean',28,'Hospital Administrator',90000);
+INSERT INTO `staff` VALUES (1,'Anthony',20,'Physician',10000),(2,'Karmehr',29,'Nurse',100000),(3,'Phillip',24,'Surgeon',50000),
+(4,'Derrick',22,'Pharmacist',30000),(5,'Tyler',25,'Anesthesiologist',60000),(6,'Matthew',26,'Physical Therapist',70000),
+(7,'Geronimo',27,'Dietitian',80000),(8,'Austin',23,'Medical Biller',40000),(9,'Sam',21,'Medical Records Clerk',20000),
+(10,'Kean',28,'Hospital Administrator',90000), (11,'Robby',36,'Doctor',160000), (12,'Earl',40,'Doctor',140000),
+(13,'Brock',26,'Pharmacist',40000), (14,'Jalen',54,'Physical Therapist',60000), (15,'Brandon',62,'Surgeon',200000);
 /*!40000 ALTER TABLE `staff` ENABLE KEYS */;
 UNLOCK TABLES;
 
