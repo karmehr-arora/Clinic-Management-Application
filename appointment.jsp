@@ -104,6 +104,16 @@
 				ResultSet rs2 = stmt2.executeQuery("SELECT * FROM attends natural join appointments WHERE staffID='" + request.getParameter("staffID") + "' AND date = '" + request.getParameter("date") + "'AND time = '" + request.getParameter("time")+ "'");
 				Statement stmt3 = con.createStatement();
 				ResultSet rs3 = stmt3.executeQuery("SELECT * FROM attends natural join appointments WHERE patientID='" + request.getParameter("patientID") + "' AND date = '" + request.getParameter("date") + "'AND time = '" + request.getParameter("time")+ "'");
+				
+				Statement stmt10 = con.createStatement();
+				ResultSet checkPatientExists = stmt10.executeQuery("SELECT * FROM patient WHERE patientID=" + request.getParameter("patientID"));
+				Statement stmt11 = con.createStatement();
+				ResultSet checkStaffExists = stmt11.executeQuery("SELECT * FROM staff WHERE staffID=" + request.getParameter("staffID"));
+				Statement stmt12 = con.createStatement();
+				ResultSet checkRoomExists = stmt12.executeQuery("SELECT * FROM room WHERE roomNumber=" + request.getParameter("room"));
+				Statement stmt13 = con.createStatement();
+				ResultSet checkServiceNameExists = stmt13.executeQuery("SELECT * FROM services WHERE serviceName='" + request.getParameter("serviceName") + "'");
+
 				if(rs2.isBeforeFirst())
 				{
 					out.println("Patient already has appointment at this time");
@@ -115,12 +125,35 @@
 					out.println("Staff already has appointment at this time");
 					appointmentValid = false;
 
-				}				
+				}		
+		
 				if(rs1.isBeforeFirst())
 				{
 					out.println("Room already has appointment at this time");
 					appointmentValid = false;
 				}
+
+				if(!checkPatientExists.isBeforeFirst())
+				{
+					out.println("Patient does not exists.");
+					appointmentValid = false;
+				}
+				if(!checkStaffExists.isBeforeFirst())
+				{
+					out.println("Staff does not exist.");
+					appointmentValid = false;
+				}
+				if(!checkRoomExists.isBeforeFirst())
+				{
+					out.println("Room does not exist.");
+					appointmentValid = false;
+				}
+				if(!checkServiceNameExists.isBeforeFirst())
+				{
+					out.println("Service does not exist.");
+					appointmentValid = false;
+				}
+
 
 				
 				if(appointmentValid)
@@ -159,7 +192,6 @@
 				Statement stmt = con.createStatement();
 				String sql = String.format("DELETE FROM appointments WHERE appointmentID ="+ request.getParameter("appointmentID"));
 				stmt.executeUpdate(sql);	
-				out.println(request.getParameter("serviceNameDelete"));
 
 				sql = "SELECT cost FROM services WHERE serviceName = '"+request.getParameter("serviceNameDelete")+"'";
 				ResultSet rs5 = stmt.executeQuery(sql);

@@ -72,8 +72,8 @@
 						<%  // Setting variables db, user, root, & password
 							String db="clinicmaster"; 
 							String user; // assumes database name is the same as username 
-							user = "root"; // default database name
-							String password = "!Nf4@$TrnK7uR3";
+							user = "hello"; // default database name
+							String password = "Hello123!";
 			
 							// Checking to see if password & username are valid
 							if(request.getParameter("username") != null && request.getParameter("password") != null) {
