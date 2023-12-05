@@ -44,10 +44,10 @@
 					<input type = "text" class = "form-control" name = "age" placeholder = "Age" size = "50" minlength = "1" maxlength="3">
 				</div>
 				<div class="mb-3">
-					<input type = "text" class = "form-control" name = "address" placeholder = "Address" size = "50" minlength = "16" maxlength="16">
+					<input type = "text" class = "form-control" name = "address" placeholder = "Address" size = "50">
 				</div>
 				<div class="mb-3">
-					<input type = "text" class = "form-control" name = "billingCard" placeholder = "Billing Card" size = "50">
+					<input type = "text" class = "form-control" name = "billingCard" placeholder = "Billing Card" size = "50" minlength = "16" maxlength="16">
 				</div>
 				<input type = "submit" class="btn btn-primary" value = "Add Patient to System">
 			</form>
