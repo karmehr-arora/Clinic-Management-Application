@@ -36,21 +36,60 @@
 
         <div class = "container d-flex justify-content-center align-items-center bg-primary-subtle card p-3">
             <h2>Add Services</h2>
-            <form class="form-container" action="addServicesProcess.jsp" method="post">
-                <div class="mb-3">
-                    <label for="serviceName">Service Name</label>
-                    <input type="text" class="form-control" id="serviceName" name="serviceName" placeholder="Enter Service Name" required size = "50">
-                </div>
-                <div class="mb-3">
-                    <label for="cost">Cost</label>
-                    <input type="text" class="form-control" id="cost" name="cost" placeholder="Enter Cost" required>
-                </div>
-                <div class="mb-3">
-                    <label for="serviceDepartment">Service Department</label>
+				<form class="form-container" action="departments.jsp" method="post">
+					<div class="mb-3">
+						<label for="serviceName" class="form-label">Service Name</label>
+                    	<input type="text" class="form-control" id="serviceName" name="serviceName" placeholder="Enter Service Name" size = "50" required >
+					</div>
+					<div class="mb-3">
+						<label for="cost" class="form-label">Cost</label>
+                    	<input type="text" class="form-control" id="cost" name="cost" placeholder="Enter Cost" required>
+					</div>
+					<div class="mb-3">
+						<label for="serviceDepartment" class="form-label">Service Department</label>
                     <input type="text" class="form-control" id="serviceDepartment" name="serviceDepartment" placeholder="Enter Service Department" required>
-                </div>
-                <button type="submit" class="btn btn-primary">Add Service</button>
+
+					</div>
+					<button type="submit" class="btn btn-primary">Add Service</button>
+				</form>
             </form>
+			<form class="form-container">
+				<%	
+					// Setting variables db, user, root, & password
+					String db="clinicmaster"; 
+					String user; // assumes database name is the same as username 
+					user = "root";
+					String password = "root";
+
+					try{ //creating sql connection
+						java.sql.Connection con; 
+						Class.forName("com.mysql.jdbc.Driver");
+						con=DriverManager.getConnection("jdbc:mysql://localhost/" + db, user, password); 
+
+						// saving user inputs
+						String serviceName = request.getParameter("serviceName"), serviceDepartment = request.getParameter("serviceDepartment");
+						Integer cost;
+						try {
+							cost = Integer.parseInt(request.getParameter("cost"));
+						} catch (NumberFormatException e) {
+							cost = -1;
+						}
+						// out.print("cost: " + cost);
+
+						// creating sql insert statement
+						String sql = "INSERT INTO services VALUES('" + serviceName + "', " + cost + ", '" + serviceDepartment + "');";
+						Statement stmt1 = con.createStatement();
+						if(!(serviceName == null || cost == -1 || serviceDepartment == null) ){
+							stmt1.executeUpdate(sql);
+						}
+						stmt1.close();
+						con.close();
+					} 
+					catch(SQLException e) {
+						out.println("SQLException caught: " + e.getMessage());
+					}
+				%>
+			</form>
         </div>
         
 		<br>
@@ -71,12 +110,7 @@
 				</thead>
 				<tbody>
 					<% 
-                    String db="clinicmaster"; 
-                    String user; // assumes database name is the same as username 
-                    user = "root";
-                    String password = "root";
-					try 
-					{ 
+					try { 
 						java.sql.Connection con; 
 						Class.forName("com.mysql.jdbc.Driver");
 						con=DriverManager.getConnection("jdbc:mysql://localhost/" + db, user, password); 
@@ -87,9 +121,7 @@
 						}
 						stmt1.close();
 						con.close();
-					} 
-					catch(SQLException e) 
-					{
+					} catch(SQLException e) {
 						out.println("SQLException caught: " + e.getMessage());
 					}
 					%>
