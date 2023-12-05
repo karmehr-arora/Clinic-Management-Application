@@ -68,7 +68,7 @@
 									connection=DriverManager.getConnection("jdbc:mysql://localhost/" + db, user, password); 
 									
 									//Creating and executing sql statement
-									String sql = "SELECT * FROM login WHERE '" + request.getParameter("username") + "' IN (SELECT UserID FROM login) AND '" + request.getParameter("password") + "' IN (SELECT password FROM login);";
+									String sql = "SELECT * FROM login WHERE userID IN (SELECT '" + request.getParameter("username") + "' FROM login) AND password IN (SELECT '" + request.getParameter("password") + "' FROM login);";
 									Statement stmt = connection.createStatement();
 									ResultSet rs = stmt.executeQuery(sql);
 			

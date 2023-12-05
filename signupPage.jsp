@@ -55,7 +55,7 @@
                             <input type="text" class="form-control" id="username" name="username" required>
                         </div>
                         <div class="mb-3">
-                            <label for="password" class="form-label">Password</label>
+                            <label for="password" class="form-label">Password (+8 Characters)</label>
                             <input type="password" class="form-control" id="password" name="password" required>
                         </div>
                         <div class="mb-3">
@@ -78,27 +78,40 @@
 							// Checking to see if password & username are valid
 							if(request.getParameter("username") != null && request.getParameter("password") != null) {
 								try { 
+									// Creating Connection
 									java.sql.Connection connection; 
 									Class.forName("com.mysql.jdbc.Driver");
 									connection=DriverManager.getConnection("jdbc:mysql://localhost/" + db, user, password); 
-									// out.println(db + " database successfully opened.<br/><br/>" ); 
-									// out.println("Initial entries in table \"staff\": <br />");
-									String sql = "SELECT * FROM login WHERE '" + request.getParameter("username") + "' IN (SELECT UserID FROM login) AND '" + request.getParameter("password") + "' IN (SELECT password FROM login);";
+									
+									// saving user input
+									String firstName = request.getParameter("firstName"), lastName = request.getParameter("lastName"), username = request.getParameter("username");
+									String pass = request.getParameter("password"), age = request.getParameter("age"), address = request.getParameter("address");
+
+									//Creating and executing sql statement
+									String sql = "SELECT userID FROM login WHERE userID IN (SELECT '" + username + "' FROM login);";
 									Statement stmt = connection.createStatement();
 									ResultSet rs = stmt.executeQuery(sql);
 			
+									// saving user input and testing for validity
 									String testUser = "", testPass = "";
 									if (rs.isBeforeFirst() ) {    
 										rs.next();
-										testUser = rs.getString(1);
-										testPass = rs.getString(2);
-									} 
-									boolean passLen = (request.getParameter("password").toString().length() >= 8);
-									if(testUser.equals(request.getParameter("username")) && testPass.equals(request.getParameter("password")) && passLen){
-										response.sendRedirect("homePage.jsp");
+										testUser = rs.getString(1); //gets username
+									} // checking user authentication
+									boolean passLen = (pass.toString().length() >= 8);
+									if(testUser.equals(username.toString())){
+										out.println("Invalid Username <br> Username Already Exists");
 									} else{
-										out.println("Invalid Username or Password <br/><br/> Please try again<br/><br/>");
+										if(!passLen){
+											out.println("Password must be 8 or more characters");
+										} else{
+											int ageInt = Integer.parseInt(age);
+											sql = "INSERT INTO login VALUES('" + username + "','" + pass + "'," + ageInt + ",'" + firstName + "','" + lastName + "','" + address + "'," + 1 + ")";
+											stmt.executeUpdate(sql);	            	
+											response.sendRedirect("loginPage.jsp");
+										}
 									}
+									
 									rs.close();
 									stmt.close();
 									connection.close();
