@@ -43,7 +43,7 @@
 					</div>
 					<div class="mb-3">
 						<label for="cost" class="form-label">Cost</label>
-                    	<input type="text" class="form-control" id="cost" name="cost" placeholder="Enter Cost" required>
+                    	<input type="number" class="form-control" id="cost" name="cost" placeholder="Enter Cost" required>
 					</div>
 					<div class="mb-3">
 						<label for="serviceDepartment" class="form-label">Service Department</label>
@@ -164,7 +164,65 @@
 			</table>
 		</div>
 		<br>
-        
+
+        <!-- View & Add to Rooms -->
+        <div class = "container d-flex justify-content-center align-items-center bg-primary-subtle card p-3">
+            <h2>Add Rooms</h2>
+				<form class="form-container" action="departments.jsp" method="post">
+					<div class="mb-3">
+						<label for="Room Number" class="form-label">Room Number</label>
+                    	<input type="number" class="form-control" id="Room Number" name="Room Number" placeholder="Enter Room Number" size = "50" required >
+					</div>
+					<div class="mb-3">
+						<label for="Building" class="form-label">Building</label>
+                    	<input type="number" class="form-control" id="Building" name="Building" placeholder="Enter Building Number" required>
+					</div>
+					<div class="mb-3">
+						<label for="type" class="form-label">Room Type</label>
+                    	<input type="text" class="form-control" id="type" name="type" placeholder="Enter Room Type" required>
+					</div>
+					<div class="mb-3">
+						<label for="Beds Available" class="form-label">Beds Available</label>
+                    	<input type="number" class="form-control" id="Beds Available" name="Beds Available" placeholder="Enter Beds Available" required>
+					</div>
+					<button type="submit" class="btn btn-primary">Add Service</button>
+				</form>
+            </form>
+			<form class="form-container">
+				<%
+					try{ //creating sql connection
+						java.sql.Connection con; 
+						Class.forName("com.mysql.jdbc.Driver");
+						con=DriverManager.getConnection("jdbc:mysql://localhost/" + db, user, password); 
+
+						// saving user inputs
+						String roomType = request.getParameter("type");
+						String roomNumber = request.getParameter("Room Number"), Building = request.getParameter("Building"), bedsAvailable = request.getParameter("Beds Available");
+						Integer rmNumber = -1, bd = -1, ba = -1;
+						try {
+							rmNumber = Integer.parseInt(roomNumber);
+							bd = Integer.parseInt(Building);
+							ba = Integer.parseInt(bedsAvailable);
+						} catch (NumberFormatException e) {
+							rmNumber = -1;
+						}
+						// creating sql insert statement
+						String sql = "INSERT INTO room VALUES(" + rmNumber + ", " + bd + ", '" + roomType + "', " + ba + ");";
+						Statement stmt1 = con.createStatement();
+						if(!(roomType == null || rmNumber == -1 || bd == -1 || ba == -1) ){
+							stmt1.executeUpdate(sql);
+						}
+						stmt1.close();
+						con.close();
+					} 
+					catch(SQLException e) {
+						out.println("SQLException caught: " + e.getMessage());
+					}
+				%>
+			</form>
+        </div>
+		<br>
+
         <div class = "container d-flex justify-content-center align-items-center bg-primary-subtle card p-3">
 			<h2>Search for Rooms</h2>
 			<form action ="departments.jsp">
@@ -243,6 +301,8 @@
 		</div>
 		<br>
 
+
+        <!-- View Inventory -->
 
         <div class = "container d-flex justify-content-center align-items-center bg-primary-subtle card p-3">
 			<h2>Search Inventory</h2>
