@@ -22,6 +22,9 @@
 				  <li class="nav-item">
 					<a class="nav-link" href="./appointment.jsp">Appointment</a>
 				  </li>
+				  <li class="nav-item">
+					<a class="nav-link" href="./departments.jsp">Departments</a>
+				  </li>
 				</ul>
 				
 				<ul class="navbar-nav ms-auto">

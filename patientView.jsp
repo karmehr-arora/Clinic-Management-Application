@@ -22,6 +22,9 @@
 				  <li class="nav-item">
 					<a class="nav-link" href="./appointment.jsp">Appointment</a>
 				  </li>
+				  <li class="nav-item">
+					<a class="nav-link" href="./departments.jsp">Departments</a>
+				  </li>
 				</ul>
 				<ul class="navbar-nav ms-auto">
 					<li class="nav-item">
@@ -47,7 +50,7 @@
 					<input type = "text" class = "form-control" name = "address" placeholder = "Address" size = "50">
 				</div>
 				<div class="mb-3">
-					<input type = "text" class = "form-control" name = "billingCard" placeholder = "Billing Card" size = "50" minlength = "16" maxlength="16">
+					<input type = "text" class = "form-control" name = "billingCard" placeholder = "Billing Card" size = "50" minlength = "4" maxlength="4">
 				</div>
 				<input type = "submit" class="btn btn-primary" value = "Add Patient to System">
 			</form>
@@ -56,8 +59,8 @@
 		<%
 		String db="clinicmaster"; 
 		String user; // assumes database name is the same as username 
-		  user = "hello";
-		String password = "Hello123!";
+		  user = "root";
+		String password = "root";
 		try 
 		{ 
 			if(request.getParameter("name") != null && request.getParameter("age")!= null && request.getParameter("address") != null&& request.getParameter("billingCard") != null)

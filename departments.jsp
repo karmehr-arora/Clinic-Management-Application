@@ -18,11 +18,11 @@
 				  <li class="nav-item">
 					<a class="nav-link" href="./staffView.jsp">Staff</a>
 				  </li>
-                  <li class="nav-item">
-					<a class="nav-link" href="./departments.jsp">Departments</a>
-				  </li>
 				  <li class="nav-item">
-					<a class="nav-link active" aria-current="page" href="./appointment.jsp">Appointment</a>
+					<a class="nav-link" href="./appointment.jsp">Appointment</a>
+				  </li>
+                  <li class="nav-item">
+					<a class="nav-link active" aria-current= 'page' href="./departments.jsp">Departments</a>
 				  </li>
 				</ul>
 				<ul class="navbar-nav ms-auto">

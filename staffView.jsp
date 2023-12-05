@@ -17,10 +17,13 @@
 						<a class="nav-link" href="./patientView.jsp">Patient</a>
 					  </li>
 					  <li class="nav-item">
-						<a class="nav-link" href="./staffView.jsp">Staff</a>
+						<a class="nav-link active" aria-current="page" href="./staffView.jsp">Staff</a>
 					  </li>
 					  <li class="nav-item">
 						<a class="nav-link" href="./appointment.jsp">Appointment</a>
+					  </li>
+					  <li class="nav-item">
+						<a class="nav-link" href="./departments.jsp">Departments</a>
 					  </li>
 					</ul>
 					
@@ -57,38 +60,72 @@
 						<label for="salary">Salary</label>
 						<input type="text" class="form-control" id="salary" name="salary" placeholder="Enter Salary" required>
 					</div>
-					<input type = "submit" class="btn btn-primary" value = "Add Staff">
+					<input type = "submit" class="btn btn-primary" value = "Add Staff to System">
 				</form>
 			</form>
+
+			<%
+		String db="clinicmaster"; 
+		String user; // assumes database name is the same as username 
+		  user = "root";
+		String password = "root";
+		try 
+		{ 
+			if(request.getParameter("name") != null && request.getParameter("age")!= null && request.getParameter("job") != null&& request.getParameter("salary") != null)
+			{
+				java.sql.Connection con; 
+				Class.forName("com.mysql.jdbc.Driver");
+				con=DriverManager.getConnection("jdbc:mysql://localhost/" + db, user, password); 
+				Statement stmt = con.createStatement();
+				String sql = String.format("INSERT INTO staff(name, age, job, salary) VALUES('%s', %s, '%s',%s)",request.getParameter("name"),request.getParameter("age"),request.getParameter("job"),request.getParameter("salary"));
+				stmt.executeUpdate(sql);		
+				stmt.close();
+				con.close();
+			}
+
+			else if(request.getParameter("staffID") != null)
+			{
+				java.sql.Connection con; 
+				Class.forName("com.mysql.jdbc.Driver");
+				con=DriverManager.getConnection("jdbc:mysql://localhost/" + db, user, password); 
+				Statement stmt = con.createStatement();
+				String sql = String.format("DELETE FROM staff WHERE staffID ="+ request.getParameter("staffID"));
+				stmt.executeUpdate(sql);		
+				stmt.close();
+				con.close();
+			}
+		} 
+		catch(SQLException e) 
+		{
+			out.println("SQLException caught: " + e.getMessage());
+		}
+		%>
         
 		</div>
 		<br>
+
 		<div class = "container d-flex justify-content-center align-items-center bg-primary-subtle card p-3">
 			<h2>View/Edit Staff</h2>
-			<form class="form-container">
 				<table class="table table-bordered">
 					<thead>
 						<tr>
-							<th>Staff ID</th>
-							<th>Name</th>
-							<th>Age</th>
-							<th>Job</th>
-							<th>Salary</th>
+							<th scope="col">Staff ID</th>
+							<th scope="col">Name</th>
+							<th scope="col">Age</th>
+							<th scope="col">Job</th>
+							<th scope="col">Salary</th>
 						</tr>
 					</thead>
 					<tbody>
-						<% 
-						String db="clinicmaster"; 
-						String user; // assumes database name is the same as username 
-						user="root"; 
-						String password = "root";						try { 
-							java.sql.Connection con; Class.forName("com.mysql.jdbc.Driver");
+						<% 					
+						try { 
+							java.sql.Connection con; 
+							Class.forName("com.mysql.jdbc.Driver");
 							con=DriverManager.getConnection("jdbc:mysql://localhost/" + db, user, password); 
-							out.println(db + " database successfully opened.<br/><br/>" ); out.println("Initial entries in table \"staff\": <br />");
 							Statement stmt = con.createStatement();
 							ResultSet rs = stmt.executeQuery("SELECT *  FROM staff");
 							while (rs.next()) {
-								out.println(rs.getInt(1) + " " + rs.getString(2) + " " + rs.getInt(3) + " " + rs.getString(4) + " " + rs.getInt(5) + "<br /><br />");
+								out.println("<tr><td>" + rs.getInt(1) + "</td><td>" + rs.getString(2) + "</td><td>" + rs.getInt(3) + "</td><td>" + rs.getString(4) + "</td><td>" + rs.getInt(5) + "</td><td><form action = 'patientView.jsp' method = 'GET'><input type='submit' class = 'btn btn-primary' name = 'pay_balance' value = 'Pay'/><input type='hidden' name = 'patientIDPay' value = "+rs.getInt(1)+ "></form></td><td><form action = 'patientView.jsp' method = 'GET'><input type='submit' class = 'btn btn-danger' name = 'delete_user' value = 'Delete'/><input type='hidden' name = 'patientID' value = "+rs.getInt(1)+ "></form></td></tr>");
 							}
 							rs.close();
 							stmt.close();
@@ -100,26 +137,9 @@
 						%>
 					</tbody>
 				</table>
-			</form>
 		</div>
+
 		<br>
-		<div class = "container d-flex justify-content-center align-items-center bg-primary-subtle card p-3">
-			<h2>Add Services</h2>
-			<form class="form-container" action="addServicesProcess.jsp" method="post">
-				<div class="mb-3">
-					<label for="serviceName">Service Name</label>
-					<input type="text" class="form-control" id="serviceName" name="serviceName" placeholder="Enter Service Name" required>
-				</div>
-				<div class="mb-3">
-					<label for="cost">Cost</label>
-					<input type="text" class="form-control" id="cost" name="cost" placeholder="Enter Cost" required>
-				</div>
-				<div class="mb-3">
-					<label for="serviceDepartment">Service Department</label>
-					<input type="text" class="form-control" id="serviceDepartment" name="serviceDepartment" placeholder="Enter Service Department" required>
-				</div>
-				<button type="submit" class="btn btn-primary">Add Service</button>
-			</form>
-		</div>
+
 	</body>
 	</html>
