@@ -17,10 +17,13 @@
 						<a class="nav-link" href="./patientView.jsp">Patient</a>
 					  </li>
 					  <li class="nav-item">
-						<a class="nav-link" href="./staffView.jsp">Staff</a>
+						<a class="nav-link active" aria-current="page" href="./staffView.jsp">Staff</a>
 					  </li>
 					  <li class="nav-item">
 						<a class="nav-link" href="./appointment.jsp">Appointment</a>
+					  </li>
+					  <li class="nav-item">
+						<a class="nav-link" href="./departments.jsp">Departments</a>
 					  </li>
 					</ul>
 					
