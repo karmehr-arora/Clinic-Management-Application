@@ -72,8 +72,8 @@
 						<%  // Setting variables db, user, root, & password
 							String db="clinicmaster"; 
 							String user; // assumes database name is the same as username 
-							user = "hello"; // default database name
-							String password = "Hello123!";
+							user = "root"; // default database name
+							String password = "root";
 			
 							// Checking to see if password & username are valid
 							if(request.getParameter("username") != null && request.getParameter("password") != null) {
@@ -105,10 +105,19 @@
 										if(!passLen){
 											out.println("Password must be 8 or more characters");
 										} else{
-											int ageInt = Integer.parseInt(age);
-											sql = "INSERT INTO login VALUES('" + username + "','" + pass + "'," + ageInt + ",'" + firstName + "','" + lastName + "','" + address + "'," + 1 + ")";
-											stmt.executeUpdate(sql);	            	
-											response.sendRedirect("loginPage.jsp");
+											int AGE;
+											try {
+												AGE = Integer.parseInt(age);
+											} catch (NumberFormatException e) {
+												AGE = -1;
+											} if(AGE < 0 || AGE > 130){
+												out.println("Invalid Age: Age must be a number between 0 and 130");
+											} else{
+												int ageInt = Integer.parseInt(age);
+												sql = "INSERT INTO login VALUES('" + username + "','" + pass + "'," + ageInt + ",'" + firstName + "','" + lastName + "','" + address + "'," + 1 + ")";
+												stmt.executeUpdate(sql);	            	
+												response.sendRedirect("loginPage.jsp");
+											}
 										}
 									}
 									

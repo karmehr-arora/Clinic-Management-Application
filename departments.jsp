@@ -18,11 +18,11 @@
 				  <li class="nav-item">
 					<a class="nav-link" href="./staffView.jsp">Staff</a>
 				  </li>
-				  <li class="nav-item">
-					<a class="nav-link" href="./appointment.jsp">Appointment</a>
-				  </li>
                   <li class="nav-item">
-					<a class="nav-link active" aria-current= 'page' href="./departments.jsp">Departments</a>
+					<a class="nav-link" href="./departments.jsp">Departments</a>
+				  </li>
+				  <li class="nav-item">
+					<a class="nav-link active" aria-current="page" href="./appointment.jsp">Appointment</a>
 				  </li>
 				</ul>
 				<ul class="navbar-nav ms-auto">
@@ -36,7 +36,8 @@
 				</div>
 			</div>
 		</nav>
-		<div class="container d-flex justify-content-center align-items-center bg-primary-subtle card p-3">
+
+		<!-- <div class="container d-flex justify-content-center align-items-center bg-primary-subtle card p-3">
 			<form action = "departments.jsp" method = "Post">
 				<h2>Departments</h2>
 				<% 
@@ -100,7 +101,7 @@
 				<div class="mb-3">
 					<input type = "text" name = "serviceName" class = "form-control" placeholder = "Service Name" size = "50">
 				</div>
-				-->
+                --><!--
 				<div class="mb-3">
 					<input type = "text" name = "serviceDescription" class = "form-control" placeholder = "Service Description" size = "50">
 				</div>
@@ -111,7 +112,7 @@
 				<div class="mb-3">
 					<input type = "text" name = "room" class = "form-control" placeholder = "Room" size = "50">
 				</div>
-				-->
+                --><!--  end comment on this line
 				<div class="mb-3">
 					<input type = "date" name = "date" class = "form-control" placeholder = "Choose Appointment Date" size = "50">
 				</div>
@@ -268,7 +269,27 @@
 			out.println("SQLException caught: " + e.getMessage());
 		}
 		%>
-		</div>
+		</div> -->
+
+        <div class = "container d-flex justify-content-center align-items-center bg-primary-subtle card p-3">
+            <h2>Add Services</h2>
+            <form class="form-container" action="addServicesProcess.jsp" method="post">
+                <div class="mb-3">
+                    <label for="serviceName">Service Name</label>
+                    <input type="text" class="form-control" id="serviceName" name="serviceName" placeholder="Enter Service Name" required>
+                </div>
+                <div class="mb-3">
+                    <label for="cost">Cost</label>
+                    <input type="text" class="form-control" id="cost" name="cost" placeholder="Enter Cost" required>
+                </div>
+                <div class="mb-3">
+                    <label for="serviceDepartment">Service Department</label>
+                    <input type="text" class="form-control" id="serviceDepartment" name="serviceDepartment" placeholder="Enter Service Department" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Add Service</button>
+            </form>
+        </div>
+        
 		<br>
 		<div class = "container d-flex justify-content-center align-items-center bg-primary-subtle card p-3">
 			<h2>View Appointment for specific patient</h2>
