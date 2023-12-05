@@ -36,21 +36,78 @@
 		<div class="container d-flex justify-content-center align-items-center bg-primary-subtle card p-3">
 			<form action = "appointment.jsp" method = "GET">
 				<h2>Book Appointment</h2>
+				<% 
+				String db="clinicmaster"; 
+				String user; // assumes database name is the same as username 
+				user = "hello";
+				String password = "Hello123!";
+				try 
+				{ 
+					java.sql.Connection con; 
+					Class.forName("com.mysql.jdbc.Driver");
+					con=DriverManager.getConnection("jdbc:mysql://localhost/" + db, user, password); 
+					Statement statement1 = con.createStatement();
+					ResultSet dropdownPatient = statement1.executeQuery("select patientID date FROM patient");
+					Statement statement2 = con.createStatement();
+					ResultSet dropdownServiceName = statement2.executeQuery("select serviceName date FROM services");
+					Statement statement3 = con.createStatement();
+					ResultSet dropdownStaff = statement3.executeQuery("select staffID date FROM staff");
+					Statement statement4 = con.createStatement();
+					ResultSet dropdownRoom = statement4.executeQuery("select roomNumber FROM room");
+					out.println("<div class = 'mb-3'>"+"<select class = 'form-select' name = 'patientID'>" + "<option selected>Choose a patientID</option>");
+					while(dropdownPatient.next())
+					{
+						String temp = String.format("<option value='%s'>%s</option>", dropdownPatient.getInt(1), dropdownPatient.getInt(1));
+						out.println(temp);
+					}
+					out.println("</select>"+"</div>");
+					out.println("<div class = 'mb-3'>"+"<select class = 'form-select' name = 'serviceName'>" + "<option selected>Choose a service</option>");
+					while(dropdownServiceName.next())
+					{
+						String temp = String.format("<option value='%s'>%s</option>", dropdownServiceName.getString(1), dropdownServiceName.getString(1));
+						out.println(temp);
+					}
+					out.println("</select>"+"</div>");
+					out.println("<div class = 'mb-3'>"+"<select class = 'form-select' name = 'staffID'>" + "<option selected>Choose a staff member</option>");
+					while(dropdownStaff.next())
+					{
+						String temp = String.format("<option value='%s'>%s</option>", dropdownStaff.getInt(1), dropdownStaff.getInt(1));
+						out.println(temp);
+					}
+					out.println("</select>"+"</div>");
+					out.println("<div class = 'mb-3'>"+"<select class = 'form-select' name = 'room'>" + "<option selected>Choose a room</option>");
+					while(dropdownRoom.next())
+					{
+						String temp = String.format("<option value='%s'>%s</option>", dropdownRoom.getInt(1), dropdownRoom.getInt(1));
+						out.println(temp);
+					}
+					out.println("</select>"+"</div>");
+	
+				} 
+				catch(SQLException e) 
+				{
+					out.println("SQLException caught: " + e.getMessage());
+				}
+				%>
+				<!--
 				<div class="mb-3">
 					<input type = "text" name = "patientID" class = "form-control" placeholder = "Patient ID" size = "50">
 				</div>
 				<div class="mb-3">
 					<input type = "text" name = "serviceName" class = "form-control" placeholder = "Service Name" size = "50">
 				</div>
+				-->
 				<div class="mb-3">
 					<input type = "text" name = "serviceDescription" class = "form-control" placeholder = "Service Description" size = "50">
 				</div>
+				<!--
 				<div class="mb-3">
 					<input type = "text" name = "staffID" class = "form-control" placeholder = "Staff ID" size = "50">
 				</div>
 				<div class="mb-3">
 					<input type = "text" name = "room" class = "form-control" placeholder = "Room" size = "50">
 				</div>
+				-->
 				<div class="mb-3">
 					<input type = "date" name = "date" class = "form-control" placeholder = "Choose Appointment Date" size = "50">
 				</div>
@@ -86,10 +143,6 @@
 				<input type = "submit" class="btn btn-primary" value = "Book Appointment">
 			</form>
         <%
-		String db="clinicmaster"; 
-		String user; // assumes database name is the same as username 
-		user = "hello";
-		String password = "Hello123!";
 		try 
 		{ 
 			if(request.getParameter("date") != null && !request.getParameter("date").equals("") && request.getParameter("time") != null && !request.getParameter("time").equals(""))
