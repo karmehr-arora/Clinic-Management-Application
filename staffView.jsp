@@ -125,7 +125,7 @@
 							Statement stmt = con.createStatement();
 							ResultSet rs = stmt.executeQuery("SELECT *  FROM staff");
 							while (rs.next()) {
-								out.println("<tr><td>" + rs.getInt(1) + "</td><td>" + rs.getString(2) + "</td><td>" + rs.getInt(3) + "</td><td>" + rs.getString(4) + "</td><td>" + rs.getInt(5) + "</td><td><form action = 'patientView.jsp' method = 'GET'><input type='submit' class = 'btn btn-primary' name = 'pay_balance' value = 'Pay'/><input type='hidden' name = 'patientIDPay' value = "+rs.getInt(1)+ "></form></td><td><form action = 'patientView.jsp' method = 'GET'><input type='submit' class = 'btn btn-danger' name = 'delete_user' value = 'Delete'/><input type='hidden' name = 'patientID' value = "+rs.getInt(1)+ "></form></td></tr>");
+								out.println("<tr><td>" + rs.getInt(1) + "</td><td>" + rs.getString(2) + "</td><td>" + rs.getInt(3) + "</td><td>" + rs.getString(4) + "</td><td>" + rs.getInt(5) + "</td><td><form action = 'staffView.jsp' method = 'GET'><input type='submit' class = 'btn btn-danger' name = 'delete_user' value = 'Delete'/><input type='hidden' name = 'staffID' value = "+rs.getInt(1)+ "></form></td></tr>");
 							}
 							rs.close();
 							stmt.close();
