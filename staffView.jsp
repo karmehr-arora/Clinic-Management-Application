@@ -29,10 +29,7 @@
 					
 					<ul class="navbar-nav ms-auto">
 						<li class="nav-item">
-							<a class="nav-link" href="./loginPage.jsp">Login</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link" href="./signupPage.jsp">Signup</a>
+							<a class="nav-link" href="./signupPage.jsp">SignOut</a>
 						</li>
 					</ul>
 					
@@ -138,8 +135,125 @@
 					</tbody>
 				</table>
 		</div>
+		<br>
+        <br>
+		
+		<div class="container d-flex justify-content-center align-items-center bg-primary-subtle card p-3">
+			<form action = "staffView.jsp" method = "GET">
+				<h2>Add Inventory</h2>
+				<form class="form-container" action="addItemProcess.jsp" method="post">
+					<div class="mb-3">
+						<label for="name">Item Name</label>
+						<input type="text" class="form-control" id="name" name="name" placeholder="Enter Item" required>
+					</div>
+					<div class="mb-3">
+						<label for="age">Item Quantity</label>
+						<input type="text" class="form-control" id="quantity" name="quantity" placeholder="Enter Quantity" required>
+					</div>
+					<input type = "submit" class="btn btn-primary" value = "Add Item to System">
+				</form>
+			</form>
+		<%
+		try 
+		{ 
+			if(request.getParameter("name") != null && request.getParameter("quantity")!= null)
+			{
+				java.sql.Connection con; 
+				Class.forName("com.mysql.jdbc.Driver");
+				con=DriverManager.getConnection("jdbc:mysql://localhost/" + db, user, password); 
+				Statement stmt = con.createStatement();
+				String sql = String.format("INSERT INTO inventory(name, quantity) VALUES('%s', %s)",request.getParameter("name"),request.getParameter("quantity"));
+				stmt.executeUpdate(sql);		
+				stmt.close();
+				con.close();
+			}
+		} 
+		catch(SQLException e) 
+		{
+			out.println("SQLException caught: " + e.getMessage());
+		}
+		%>
+        
+		</div>
 
 		<br>
+
+		<div class = "container d-flex justify-content-center align-items-center bg-primary-subtle card p-3">
+			<h2>Search Inventory</h2>
+			<form action ="staffView.jsp">
+				<input type = "text" name = "Item Name" class = "form-control" id = "Item Name" placeholder = "Item Name" size = "50">
+				<input type = "submit" class = "btn btn-primary" value = "See Item">
+			</form>
+	
+			<table class="table table-bordered">
+				<thead>
+				<tr>
+					<th scope="col">Item ID</th>
+					<th scope="col">Item Name</th>
+					<th scope="col">Item Quantity</th>
+				</tr>
+				</thead>
+				<tbody>
+					<% 
+					try 
+					{ 
+						java.sql.Connection con; 
+						Class.forName("com.mysql.jdbc.Driver");
+						con=DriverManager.getConnection("jdbc:mysql://localhost/" + db, user, password); 
+						Statement stmt3 = con.createStatement();
+						ResultSet rs3 = stmt3.executeQuery(String.format("SELECT * FROM inventory WHERE name = '%s' OR itemID = %d", request.getParameter("Item Name"), request.getParameter("Item Name")));
+						while (rs3.next()) {
+							out.println("<tr><td>"+rs3.getInt(1) + "</td><td>" + rs3.getString(2) + "</td><td>" + rs3.getInt(3) + "</td>");
+						}
+						stmt3.close();
+                        rs3.close();
+						con.close();
+					} 
+					catch(SQLException e) 
+					{
+						out.println("SQLException caught: " + e.getMessage());
+					}
+					%>
+				</tbody>
+			</table>
+		</div>
+		<br>
+
+		<div class = "container d-flex justify-content-center align-items-center bg-primary-subtle card p-3">
+			<h2>All Inventory</h2>
+			<table class="table table-bordered">
+				<thead>
+				<tr>
+					<th scope="col">Item ID</th>
+					<th scope="col">Item Name</th>
+					<th scope="col">Item Quantity</th>
+				</tr>
+				</thead>
+				<tbody>
+					<% 
+					try { 
+						java.sql.Connection con; 
+						Class.forName("com.mysql.jdbc.Driver");
+						con=DriverManager.getConnection("jdbc:mysql://localhost/" + db, user, password); 
+						Statement stmt3 = con.createStatement();
+						ResultSet rs3 = stmt3.executeQuery("SELECT * FROM inventory;");
+						while (rs3.next()) {
+							out.println("<tr><td>"+rs3.getInt(1) + "</td><td>" + rs3.getString(2) + "</td><td>" + rs3.getInt(3) + "</td>");
+						}
+						stmt3.close();
+                        rs3.close();
+						con.close();
+					} 
+					catch(SQLException e) 
+					{
+						out.println("SQLException caught: " + e.getMessage());
+					}
+					%>
+				</tbody>
+			</table>
+		</div>
+
+		
 
 	</body>
 	</html>

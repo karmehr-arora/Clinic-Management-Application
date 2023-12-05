@@ -29,10 +29,7 @@
 				
 				<ul class="navbar-nav ms-auto">
 					<li class="nav-item">
-						<a class="nav-link" href="./loginPage.jsp">Login</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="./signupPage.jsp">Signup</a>
+						<a class="nav-link" href="./signupPage.jsp">SignOut</a>
 					</li>
 				</ul>
 				
@@ -42,32 +39,51 @@
 
 		<div class="container mt-5">
 			<h1>Welcome to Clinic Master</h1>
-			<p>This application is used by staff to handle the management of the hospital, including patients, other staff, and overall hospital management.</p>
+			<p>This application is used by Staff members to handle the management of the hospital, including patients, other staff, and overall hospital management.</p>
 		
 			<div class="mt-4">
-				<h2>Functionalities</h2>
-		
+				<h1>Functionalities</h1>
+			
+				<div>
+					<h3>Signup/Login/Signout Functions</h3>
+					<ul>
+						<li>Allow users to create their own personal account and login via their personal information</li>
+						<li>SignOut functionality that will bring the user back to the Signup / Login page</li>
+					</ul>
+				</div>
+
 				<div>
 					<h3>Patient Functions</h3>
 					<ul>
-						<li>Add/Remove Patient: Users will be able to manipulate patients' data, including name, address, phone number, billing information, etc.</li>
-						<li>Browse Patients: Users can browse through patients using an informational table.</li>
-						<li>Book Patient Appointment/Service: Users can book appointments, specifying service, patient, staff, date/time, and room.</li>
-						<li>Browse Appointments: Users can browse appointments by patient ID or view all appointments at once.</li>
-						<li>Cancel Patient Appointment: Users can delete appointments and remove associated costs from the patient's balance.</li>
-						<li>Patient Billing & Payment: Users can facilitate patient payments, with the balance adjusting based on appointments.</li>
+						<li>Add/Remove Patients: Users will be able to Add/Delete Patient instances</li>
+						<li>Pay Billing Card: Users will be able to make Payments for patients via this page</li>
 					</ul>
 				</div>
-		
+			
+				<div>
+					<h3>Staff Functions</h3>
+					<ul>
+						<li>Add/Remove Staff: Users will be able to Add/Delete Staff instances</li>
+						<li>Add/Remove/Edit/View Inventory: Staff can manipulate inventory.</li>
+					</ul>
+				</div>
+
 				<div>
 					<h3>Department Functions</h3>
 					<ul>
 						<li>Add/Remove/Edit/View Rooms: Staff can manipulate room information.</li>
 						<li>Add/Remove/Edit/View Services: Management can manipulate services.</li>
-						<li>Add/Remove/Edit/View Inventory: Staff can manipulate inventory.</li>
+					</ul>
+				</div>
+
+				<div>
+					<h3>Appointment Functions</h3>
+					<ul>
+						<li>Book Appointment</li>
+						<li>View Appointment for Specific Patient</li>
+						<li>View all Appointments</li>
 					</ul>
 				</div>
 			</div>
-		</div>
 	</body>
 	</html>

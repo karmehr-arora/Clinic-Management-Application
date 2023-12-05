@@ -27,10 +27,7 @@
 				</ul>
 				<ul class="navbar-nav ms-auto">
 					<li class="nav-item">
-						<a class="nav-link" href="./loginPage.jsp">Login</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="./signupPage.jsp">Signup</a>
+						<a class="nav-link" href="./signupPage.jsp">SignOut</a>
 					</li>
 				</ul>
 				</div>
