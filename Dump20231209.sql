@@ -1,8 +1,10 @@
--- MySQL dump 10.13  Distrib 8.0.34, for Win64 (x86_64)
+CREATE DATABASE  IF NOT EXISTS `clinicmaster` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+USE `clinicmaster`;
+-- MySQL dump 10.13  Distrib 8.0.35, for Linux (x86_64)
 --
 -- Host: 127.0.0.1    Database: clinicmaster
 -- ------------------------------------------------------
--- Server version	8.0.34
+-- Server version	8.0.35-0ubuntu0.22.04.1
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -27,7 +29,7 @@ CREATE TABLE `appointments` (
   `time` varchar(45) DEFAULT NULL,
   `date` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`appointmentID`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -36,7 +38,7 @@ CREATE TABLE `appointments` (
 
 LOCK TABLES `appointments` WRITE;
 /*!40000 ALTER TABLE `appointments` DISABLE KEYS */;
-INSERT INTO `appointments` VALUES (16,'04:00','2023-12-05');
+INSERT INTO `appointments` VALUES (16,'04:00','2023-12-05'),(17,'03:00','2024-12-12'),(18,'06:00','2023-12-25'),(19,'16:00','2024-01-05'),(20,'03:00','2024-02-24'),(21,'17:00','2024-03-15'),(22,'09:00','2024-05-12'),(23,'11:00','2024-10-25'),(24,'14:00','2024-06-16'),(25,'09:00','2024-12-20'),(26,'08:00','2023-12-29'),(27,'09:00','2024-07-06'),(28,'17:00','2024-12-05'),(29,'10:00','2024-09-06'),(30,'20:00','2024-12-24');
 /*!40000 ALTER TABLE `appointments` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -66,7 +68,7 @@ CREATE TABLE `attends` (
 
 LOCK TABLES `attends` WRITE;
 /*!40000 ALTER TABLE `attends` DISABLE KEYS */;
-INSERT INTO `attends` VALUES (16,13,126);
+INSERT INTO `attends` VALUES (16,13,126),(17,3,4),(18,9,128),(19,11,7),(20,9,3),(21,10,129),(22,11,1),(23,7,4),(24,9,7),(25,9,4),(26,11,9),(27,9,128),(28,8,10),(29,4,8),(30,10,7);
 /*!40000 ALTER TABLE `attends` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -94,7 +96,7 @@ CREATE TABLE `consistsof` (
 
 LOCK TABLES `consistsof` WRITE;
 /*!40000 ALTER TABLE `consistsof` DISABLE KEYS */;
-INSERT INTO `consistsof` VALUES (128,'Cancer Care','asldkfja'),(16,'Cancer Care','asdad');
+INSERT INTO `consistsof` VALUES (16,'Cancer Care','asdad'),(17,'Diagnostic Imaging','asdfjalkdsfj'),(18,'Emergency Medical','Heart Attack'),(19,'Maternity and Obstetrics','Giving Birth'),(20,'Immunology','Vaccine'),(21,'Mental Health','Mental Theraphy'),(22,'Diagnostic Imaging','MRI'),(23,'Rehabilitation ','Knee Rehab'),(24,'Pediatric ','Child Visit'),(25,'Laboratory','Blood Sample'),(26,'Emergency Medical','Stroke'),(27,'Cardiovascular ','Heartcheck'),(28,'Cancer Care','Chemotheraphy'),(29,'Preventative Care','Exam'),(30,'Immunology','Vaccine');
 /*!40000 ALTER TABLE `consistsof` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -196,7 +198,7 @@ CREATE TABLE `has` (
 
 LOCK TABLES `has` WRITE;
 /*!40000 ALTER TABLE `has` DISABLE KEYS */;
-INSERT INTO `has` VALUES (100,128),(900,16);
+INSERT INTO `has` VALUES (900,16),(400,17),(800,18),(400,19),(900,20),(200,21),(800,22),(300,23),(400,24),(200,25),(500,26),(400,27),(700,28),(800,29),(1000,30);
 /*!40000 ALTER TABLE `has` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -291,10 +293,10 @@ CREATE TABLE `patient` (
   `name` varchar(45) DEFAULT NULL,
   `age` int DEFAULT NULL,
   `address` varchar(45) DEFAULT NULL,
-  `billingCard` int DEFAULT NULL,
+  `billingCard` bigint DEFAULT NULL,
   `balance` int DEFAULT NULL,
   PRIMARY KEY (`patientID`)
-) ENGINE=InnoDB AUTO_INCREMENT=128 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=132 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -303,7 +305,7 @@ CREATE TABLE `patient` (
 
 LOCK TABLES `patient` WRITE;
 /*!40000 ALTER TABLE `patient` DISABLE KEYS */;
-INSERT INTO `patient` VALUES (1,'Anthony',20,'123 Blvd',500,1000),(2,'Karmehr',21,'321 Steet',1000,2000),(3,'Phillip',22,'456 Avenue',1500,3000),(4,'Derrick',23,'789 Lane',2000,4000),(5,'Tyler',24,'987 Blvd',2500,5000),(6,'Matthew',25,'123 Steret',3000,6000),(7,'Geronimo',26,'654 Avenue',3500,0),(8,'Austin',27,'987 Lane',4000,-4000),(9,'Sam',28,'789 Blvd',4500,0),(10,'Kean',29,'912 Rd',5000,10000),(124,'kean',1,'123 street',1111,0),(126,'kean',1,'123 street',1234,8000),(127,'kean',1,'123 street',1231,0);
+INSERT INTO `patient` VALUES (1,'Anthony Aston',20,'1234 Main Street, San Jose, CA',2883029345982374,4000),(2,'Karmehr Arora',21,'793245 Java Street, San Jose, CA',2849394834589752,0),(3,'Phillip James',22,'13495723 Side Street, San Francisco, CA',2948573627384958,5000),(4,'Derrick Nguyen',23,'471234 Cool Street, San Francisco, CA',2134987120095433,20000),(5,'Tyler Smith',24,'124182 Bad Street, Los Gatos, CA',1234876509871234,5000),(6,'Matthew Mcdonald',25,'12 Sun Street, Fremont, CA',2938475683977822,6000),(7,'Geronimo Aldana',26,'1234 Moon Street, Los Angeles, CA',9854089609345634,13000),(8,'Austin White',27,'897 Parkway Ave, Vallejo, CA',7852369452345832,100),(9,'Sam Smith',28,'9635 Drive Street, Santa Clara, CA',4839573839482934,1000),(10,'Vladimir Putin',29,'1234 Train Street, Gilroy, CA',2398457230495823,18000),(126,'Xi Jinping',40,'1239 Python Street, Salinas, CA',2348572034528345,8000),(127,'Joe Biden',30,'1239 Window Street, Miliptas, CA',8887654448384579,0),(128,'John Doe',80,'3492 Building Street, Redwood City, CA',7059283690470934,8000),(129,'Florida Man',65,'9874 Red Street, Las Vegas, NV',6598327465827345,10000),(130,'Elon Mush',40,'32948 Tesla Street, Fremont, CA',7853695872394857,0);
 /*!40000 ALTER TABLE `patient` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -420,4 +422,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-12-05 15:49:36
+-- Dump completed on 2023-12-09 11:13:49

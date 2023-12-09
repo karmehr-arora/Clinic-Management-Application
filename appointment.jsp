@@ -39,8 +39,8 @@
 				<% 
 				String db="clinicmaster"; 
 				String user; // assumes database name is the same as username 
-				user = "root";
-				String password = "root";
+				user = "hello";
+				String password = "Hello123!";
 				try 
 				{ 
 					java.sql.Connection con; 

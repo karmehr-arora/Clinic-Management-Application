@@ -47,7 +47,7 @@
 					<input type = "text" class = "form-control" name = "address" placeholder = "Address" size = "50">
 				</div>
 				<div class="mb-3">
-					<input type = "text" class = "form-control" name = "billingCard" placeholder = "Billing Card" size = "50" minlength = "4" maxlength="4">
+					<input type = "text" class = "form-control" name = "billingCard" placeholder = "Billing Card (16 Digit Card Number ONLY)" size = "50" minlength = "16" maxlength="16">
 				</div>
 				<input type = "submit" class="btn btn-primary" value = "Add Patient to System">
 			</form>
@@ -56,8 +56,8 @@
 		<%
 		String db="clinicmaster"; 
 		String user; // assumes database name is the same as username 
-		  user = "root";
-		String password = "root";
+		  user = "hello";
+		String password = "Hello123!";
 		try 
 		{ 
 			if(request.getParameter("name") != null && request.getParameter("age")!= null && request.getParameter("address") != null&& request.getParameter("billingCard") != null)
@@ -125,7 +125,7 @@
 					ResultSet rs = stmt.executeQuery("SELECT * FROM patient");
 					while (rs.next()) 
 					{
-						out.println("<tr><td>" + rs.getInt(1) + "</td><td>" + rs.getString(2) + "</td><td>" + rs.getInt(3) + "</td><td>" + rs.getString(4) + "</td><td>" + rs.getInt(5) + "</td><td>" + rs.getInt(6) + "</td><td><form action = 'patientView.jsp' method = 'GET'><input type='submit' class = 'btn btn-primary' name = 'pay_balance' value = 'Pay'/><input type='hidden' name = 'patientIDPay' value = "+rs.getInt(1)+ "></form></td><td><form action = 'patientView.jsp' method = 'GET'><input type='submit' class = 'btn btn-danger' name = 'delete_user' value = 'Delete'/><input type='hidden' name = 'patientID' value = "+rs.getInt(1)+ "></form></td></tr>");
+						out.println("<tr><td>" + rs.getInt(1) + "</td><td>" + rs.getString(2) + "</td><td>" + rs.getInt(3) + "</td><td>" + rs.getString(4) + "</td><td>" + rs.getLong(5) + "</td><td>" + rs.getInt(6) + "</td><td><form action = 'patientView.jsp' method = 'GET'><input type='submit' class = 'btn btn-primary' name = 'pay_balance' value = 'Pay'/><input type='hidden' name = 'patientIDPay' value = "+rs.getInt(1)+ "></form></td><td><form action = 'patientView.jsp' method = 'GET'><input type='submit' class = 'btn btn-danger' name = 'delete_user' value = 'Delete'/><input type='hidden' name = 'patientID' value = "+rs.getInt(1)+ "></form></td></tr>");
 					}
 					rs.close();
 					stmt.close();
