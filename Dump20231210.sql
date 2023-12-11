@@ -1,10 +1,10 @@
 CREATE DATABASE  IF NOT EXISTS `clinicmaster` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
 USE `clinicmaster`;
--- MySQL dump 10.13  Distrib 8.0.35, for Linux (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.34, for Win64 (x86_64)
 --
 -- Host: 127.0.0.1    Database: clinicmaster
 -- ------------------------------------------------------
--- Server version	8.0.35-0ubuntu0.22.04.1
+-- Server version	8.0.34
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -20,7 +20,6 @@ USE `clinicmaster`;
 --
 -- Table structure for table `appointments`
 --
-
 DROP TABLE IF EXISTS `appointments`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
@@ -121,7 +120,7 @@ CREATE TABLE `controlledby` (
 
 LOCK TABLES `controlledby` WRITE;
 /*!40000 ALTER TABLE `controlledby` DISABLE KEYS */;
-INSERT INTO `controlledby` VALUES ('Anesthesia',1,'Pain relief for patients'),('Cardiology',2,'Heart care'),('Dietary Service',3,'Diet help'),('Emergency Room',4,'Patient treatment'),('Intensive Care Unit',5,'Caring for patient'),('Laboratory',6,'Help to Research'),('Medical Surgery',7,'Surgical purposes'),('Neurology',8,'Nervous Treatment care'),('Obstetrics',9,'Child birth'),('Pediatrics',10,' Child care');
+INSERT INTO `controlledby` VALUES ('Anesthesia',1,'Pain relief for patients'),('Cardiology',2,'Heart care'),('Dietary Service',3,'Diet help'),('Emergency Room',4,'Patient treatment'),('Intensive Care Unit',5,'Caring for patient'),('Laboratory',6,'Help to Research'),('Medical Surgery',7,'Surgical purposes'),('Neurology',8,'Nervous Treatment care'),('Obstetrics',9,'Child birth'),('Orthopedics',15,'Body Realignment or Streching'),('Pediatrics',10,'Child care'),('Physical Therapy',11,'Physical Body care'),('Psychiatry',12,'Mental Care'),('Radiology',13,'Full-body / Skeletal Scans'),('Rehab',14,'Physical and Mental rehabilitation');
 /*!40000 ALTER TABLE `controlledby` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -145,7 +144,7 @@ CREATE TABLE `department` (
 
 LOCK TABLES `department` WRITE;
 /*!40000 ALTER TABLE `department` DISABLE KEYS */;
-INSERT INTO `department` VALUES ('Anesthesia ','Karmehr'),('Cardiology ','Sam'),('Dietary Services','Austin'),('Emergency ','Geronimo'),('Intensive Care Unit','Tyler'),('Laboratory','Kean'),('Medical-Surgical Unit','Derrick'),('Neurology ','Matthew'),('Obstetrics and Gynecology','Anthony'),('Pediatrics ','Phillip');
+INSERT INTO `department` VALUES ('Anesthesia ','Karmehr'),('Cardiology ','Sam'),('Dietary Services','Austin'),('Emergency ','Geronimo'),('Intensive Care Unit','Tyler'),('Laboratory','Kean'),('Medical-Surgical Unit','Derrick'),('Medicinal Research','Earl'),('Neurology ','Matthew'),('Obstetrics and Gynecology','Anthony'),('Oncology','kean'),('Orthopedics','Brock'),('Pediatrics ','Phillip'),('Pharmacy','Jalen'),('Surgery','Robby');
 /*!40000 ALTER TABLE `department` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -171,8 +170,38 @@ CREATE TABLE `employs` (
 
 LOCK TABLES `employs` WRITE;
 /*!40000 ALTER TABLE `employs` DISABLE KEYS */;
-INSERT INTO `employs` VALUES (1,'Anesthesia','Medication','Medication Prescription'),(2,'Cardiology','Heart','Atrial Fibrillation care'),(3,'Dietary','Diet','Diet analysis and guidance'),(4,'Emergency Department','Care','Surgery'),(5,'Intensive Care Unit','Intense Care','Shots, Drug use'),(6,'Laboratory','Research','Medication Creation'),(7,'Medical Surgery','Surgery','Surgery'),(8,'Neurology','Nervous System','Mental Health care'),(9,'Obstetrics','Child Birth','Helping give birth'),(10,'Pediatrics','Child Care','Helping take care of a child');
+INSERT INTO `employs` VALUES (1,'Anesthesia','Medication','Medication Prescription'),(2,'Cardiology','Heart','Atrial Fibrillation care'),(3,'Dietary','Diet','Diet analysis and guidance'),(4,'Emergency Department','Care','Surgery'),(5,'Intensive Care Unit','Intense Care','Shots, Drug use'),(6,'Laboratory','Research','Medication Creation'),(7,'Medical Surgery','Surgery','Surgery'),(8,'Neurology','Nervous System','Mental Health care'),(9,'Obstetrics','Child Birth','Helping give birth'),(10,'Pediatrics','Child Care','Helping take care of a child'),(11,'Physical Therapy','Physical Recovery','Methods to help the body phyiscally recover'),(12,'Psychiatry','Mental Health','Mental Help and talks'),(13,'Radiology','Medical Imaging','X-Rays'),(14,'Rehab','Physical Care','Rehabilitation centers'),(15,'Orthopedics','Skeletal Care','Realignment, Stretches');
 /*!40000 ALTER TABLE `employs` ENABLE KEYS */;
+UNLOCK TABLES;
+
+
+--
+-- Table structure for table 'enters'
+--
+
+DROP TABLE IF EXISTS `enters`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `enters` (
+  `userID` varchar(45) NOT NULL,
+  `staffID` int NOT NULL,
+  KEY `fk_enters_1_idx` (`userID`),
+  KEY `fk_enters_2_idx` (`staffID`),
+  CONSTRAINT `fk_enters_1` FOREIGN KEY (`userID`) REFERENCES `login` (`userID`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `fk_enters_2` FOREIGN KEY (`staffID`) REFERENCES `staff` (`staffID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `enters`
+--
+
+LOCK TABLES `enters` WRITE;
+/*!40000 ALTER TABLE `enters` DISABLE KEYS */;
+INSERT INTO `enters` VALUES ('123@123.com',10),('admin@gmail.com',2),('anthony@gmail.com',1),('philip@gmail.com',3),('Derrick@gmail.com',4),
+('Tyler@gmail.com',5),('Matthew@gmail.com',6), ('Geronimo@gmail.com', 7), ('Austin@gmail.com', 8), ('Sam@gmail.com',9), ('Robby@gmail.com',11),
+('Earl@gmail.com',12),('Brock@gmail.com',13),('Jalen@gmail.com',14),('kean@gmail.com',16);
+/*!40000 ALTER TABLE `enters` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -223,7 +252,7 @@ CREATE TABLE `inchargeof` (
 
 LOCK TABLES `inchargeof` WRITE;
 /*!40000 ALTER TABLE `inchargeof` DISABLE KEYS */;
-INSERT INTO `inchargeof` VALUES ('Anesthesia','Cancer Care','Caring for Cancer patients'),('Cardiology','Cardiovascular','Heart and Blood inspection'),('Dietary Services','Diagnostic Information','Dietary advice and guidance'),('Emergency','Emergency Service','Emergency care for hurt patients'),('Intensive Care Unit','Laboratory','Urgent and thorough care for patients'),('Laboratory','Disease Research','Research and medication creation'),('Medical Surgery','Surgery','Surgery on patients'),('Neurology','Mental Health','Mental Health care for patients'),('Obstetrics','Maternity','Child care information and guidance'),('Rehab','Rehabilitation','Physical and Mental rehabilitation');
+INSERT INTO `inchargeof` VALUES ('Anesthesia','Cancer Care','Caring for Cancer patients'),('Cardiology','Cardiovascular','Heart and Blood inspection'),('Dietary Services','Diagnostic Information','Dietary advice and guidance'),('Emergency','Emergency Service','Emergency care for hurt patients'),('Infectious Diseases ','Diagnosis and Treatment of Infections','Combatting infections'),('Intensive Care Unit','Laboratory','Urgent and thorough care for patients'),('Laboratory','Disease Research','Research and medication creation'),('Medical Surgery','Surgery','Surgery on patients'),('Neurology','Mental Health','Mental Health care for patients'),('Obstetrics','Maternity','Child care information and guidance'),('Orthopedics','Musculoskeletal Disorder Diagnosis','Restoring Mobility with Care'),('Physical Therapy','Physical Rehabilitation','Rebuilding strength'),('Psychiatry','Mental Health Assessment','Supporting mental well-being'),('Radiology','Medical Imaging and Diagnostic','Precision imaging for accurate diagnosis'),('Rehab','Rehabilitation','Physical and Mental rehabilitation');
 /*!40000 ALTER TABLE `inchargeof` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -239,7 +268,7 @@ CREATE TABLE `inventory` (
   `name` varchar(45) DEFAULT NULL,
   `quantity` int DEFAULT NULL,
   PRIMARY KEY (`itemID`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -248,7 +277,7 @@ CREATE TABLE `inventory` (
 
 LOCK TABLES `inventory` WRITE;
 /*!40000 ALTER TABLE `inventory` DISABLE KEYS */;
-INSERT INTO `inventory` VALUES (1,'Stethoscope',10),(2,'Syringe',20),(3,'Stretcher',30),(4,'IV ',40),(5,'Hospital Bed',50),(6,'Wheelchair',60),(7,'Surgical Instruments',70),(8,'Medical Gloves',80),(9,'X-ray Machine',90),(10,'Defibrillator',100),(11,'asdas',1),(12,'asdsad',123),(13,'NEWITEM',123213123);
+INSERT INTO `inventory` VALUES (1,'Stethoscope',10),(2,'Syringe',20),(3,'Stretcher',30),(4,'IV ',40),(5,'Hospital Bed',50),(6,'Wheelchair',60),(7,'Surgical Instruments',70),(8,'Medical Gloves',80),(9,'X-ray Machine',90),(10,'Defibrillator',100),(11,'asdas',1),(12,'asdsad',123),(13,'NEWITEM',123213123),(14,'Chairs',25),(15,'Tables',10);
 /*!40000 ALTER TABLE `inventory` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -277,7 +306,12 @@ CREATE TABLE `login` (
 
 LOCK TABLES `login` WRITE;
 /*!40000 ALTER TABLE `login` DISABLE KEYS */;
-INSERT INTO `login` VALUES ('123@123.com','12345678',1,'kean','lee','123 street',1),('admin@gmail.com','12345678',21,'Karmehr','Arora','12345 dreary lane',1);
+INSERT INTO `login` 
+VALUES ('123@123.com','12345678',1,'kean','lee','123 Street',1),('admin@gmail.com','12345678',21,'Karmehr','Arora','12345 Dreary Lane',1), ('anthony@gmail.com','12345678',21,'Anthony','briggs','54312 Tobler Ave',1),
+('philip@gmail.com','12345678',32,'Philip','Rivers','12635 Steen Rd',1), ('Derrick@gmail.com','12345678',28,'Derrick','Rose','10923 Fisher St',1), ('Tyler@gmail.com','12345678',44,'Tyler','Mace','1293 Tipper Lane',1),
+('Matthew@gmail.com','12345678',33,'Matthew','Dylan','125 Steel Lane',1), ('Geronimo@gmail.com','12345678',55,'Geronimo','Aldana','12938 Frantic St',1), ('Austin@gmail.com','12345678',66,'Austin','Reeves','163 Bascom Ave',1),
+('Sam@gmail.com','12345678',28,'Sam','Kerr','2309 Main St',1), ('Robby@gmail.com','12345678',38,'Robby','Gould','0239 Tesnor St',1), ('Earl@gmail.com','12345678',52,'Earl','Bridgewater','435 Saratoga Ave',1),
+('Brock@gmail.com','12345678',23,'Brock','Purdy','9023 Abbey Rd',1), ('Jalen@gmail.com','12345678',36,'Jalen','Hurts','2398 Cascade Rd',1), ('kean@gmail.com','12345678',58,'Kean','Taylor','2193 Bascome St',1);
 /*!40000 ALTER TABLE `login` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -331,7 +365,7 @@ CREATE TABLE `room` (
 
 LOCK TABLES `room` WRITE;
 /*!40000 ALTER TABLE `room` DISABLE KEYS */;
-INSERT INTO `room` VALUES (100,7,'Wing',100),(200,2,'Checkup',10),(300,2,'Surgery',20),(400,3,'Emergency Room',30),(500,4,'Lobby',40),(600,5,'Laboratory',50),(700,6,'Rehabilitation',60),(800,7,'Mental Health ',70),(900,8,'Cancer Research',80),(1000,9,'Intensive Care Unit',90),(1100,10,'Dietary Research',100);
+INSERT INTO `room` VALUES (100,7,'Wing',100),(200,2,'Checkup',10),(300,2,'Surgery',20),(400,3,'Emergency Room',30),(500,4,'Lobby',40),(600,5,'Laboratory',50),(700,6,'Rehabilitation',60),(800,7,'Mental Health ',70),(900,8,'Cancer Research',80),(1000,9,'Intensive Care Unit',90),(1100,10,'Dietary Research',100),(1200,11,'Checkup',50),(1300,12,'Lobby',60),(1400,13,'Surgery',70),(1500,14,'Laboratory',80);
 /*!40000 ALTER TABLE `room` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -398,8 +432,7 @@ CREATE TABLE `takescareof` (
   `patientID` int NOT NULL,
   `staffID` int NOT NULL,
   `patientMedicalInfo` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`patientID`,`staffID`),
-  CONSTRAINT `patientid` FOREIGN KEY (`patientID`) REFERENCES `patient` (`patientID`) ON DELETE CASCADE ON UPDATE CASCADE
+  PRIMARY KEY (`patientID`,`staffID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -409,7 +442,7 @@ CREATE TABLE `takescareof` (
 
 LOCK TABLES `takescareof` WRITE;
 /*!40000 ALTER TABLE `takescareof` DISABLE KEYS */;
-INSERT INTO `takescareof` VALUES (1,10,'Name: Anthony, Age: 23, DOB: 9/10/2000'),(2,20,'Name: Karmehr, Age: 24, DOB:9/10/1999 '),(3,30,'Name: Phillip, Age: 25, DOB: 9/10/1998'),(4,40,'Name: Derrick, Age: 26, DOB: 9/10/1997'),(5,50,'Name: Tyler, Age: 27, DOB: 9/10/1996'),(6,60,'Name: Matthew, Age: 28, DOB: 9/10/1995'),(7,70,'Name: Sam, Age: 29, DOB: 9/10/1994'),(8,80,'Name: Geronimo, Age: 30, DOB: 9/10/1993'),(9,90,'Name: Austin, Age: 31, DOB: 9/10/1992'),(10,100,'Name: Kean, Age: 32, DOB: 9/10/1991');
+INSERT INTO `takescareof` VALUES (1,10,'Name: Anthony, Age: 23, DOB: 9/10/2000'),(2,20,'Name: Karmehr, Age: 24, DOB:9/10/1999 '),(3,30,'Name: Phillip, Age: 25, DOB: 9/10/1998'),(4,40,'Name: Derrick, Age: 26, DOB: 9/10/1997'),(5,50,'Name: Tyler, Age: 27, DOB: 9/10/1996'),(6,60,'Name: Matthew, Age: 28, DOB: 9/10/1995'),(7,70,'Name: Sam, Age: 29, DOB: 9/10/1994'),(8,80,'Name: Geronimo, Age: 30, DOB: 9/10/1993'),(9,90,'Name: Austin, Age: 31, DOB: 9/10/1992'),(10,100,'Name: Kean, Age: 32, DOB: 9/10/1991'),(11,110,'Name: Robby Age: 36, DOB: 9/10/1987'),(12,120,'Name: Earl Age: 40, DOB: 9/10/1983'),(13,130,'Name: Brock Age: 35 DOB: 9/10/1988'),(14,140,'Name: Tyler Age: 37, DOB: 9/10/1986'),(15,150,'Name: Jalen Age: 54, DOB: 9/10/1969');
 /*!40000 ALTER TABLE `takescareof` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -422,4 +455,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-12-09 11:13:49
+-- Dump completed on 2023-12-10 20:52:55
