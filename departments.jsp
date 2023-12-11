@@ -184,7 +184,7 @@
 						<label for="Beds Available" class="form-label">Beds Available</label>
                     	<input type="number" class="form-control" id="Beds Available" name="Beds Available" placeholder="Enter Beds Available" required>
 					</div>
-					<button type="submit" class="btn btn-primary">Add Service</button>
+					<button type="submit" class="btn btn-primary">Add Room</button>
 				</form>
             </form>
 			<form class="form-container">
@@ -226,7 +226,7 @@
 			<h2>Search for Rooms</h2>
 			<form action ="departments.jsp">
 				<input type = "text" name = "Room Type" class = "form-control" id = "Room Type" placeholder = "Room Type" size = "50">
-				<input type = "submit" class = "btn btn-primary" value = "See Service">
+				<input type = "submit" class = "btn btn-primary" value = "Find Rooms">
 			</form>
 	
 			<table class="table table-bordered">
