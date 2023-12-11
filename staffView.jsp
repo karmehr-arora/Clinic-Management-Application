@@ -234,7 +234,7 @@
 						Statement stmt3 = con.createStatement();
 						ResultSet rs3 = stmt3.executeQuery("SELECT * FROM inventory;");
 						while (rs3.next()) {
-							out.println("<tr><td>"+rs3.getInt(1) + "</td><td>" + rs3.getString(2) + "</td><td>" + rs3.getInt(3) + "</td>");
+							out.println("<tr><td>" + rs3.getInt(1) + "</td><td>" + rs3.getString(2) + "</td><td>" + rs3.getInt(3)+ "</td><td><form action = 'staffView.jsp' method = 'GET'><input type='submit' class = 'btn btn-danger' name = 'delete_item' value = 'Delete'/><input type='hidden' name = 'itemID' value = "+rs3.getInt(1)+ "></form></td></tr>");
 						}
 						stmt3.close();
                         rs3.close();
