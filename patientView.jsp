@@ -5,36 +5,35 @@
 		<link href="css/bootstrap.min.css" rel="stylesheet"/>
 	</head>
 	<body>
-		<nav class="navbar navbar-expand-lg bg-body-tertiary">
+		<nav class="navbar navbar-expand-lg bg-warning border border-dark">
 			<div class="container-fluid">
-				<a class="navbar-brand" href="homePage.jsp">Clinic Master</a>
-			  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-				<span class="navbar-toggler-icon"></span>
-			  </button>
-			  <div class="collapse navbar-collapse" id="navbarText">
-				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
-				  <li class="nav-item">
-					<a class="nav-link active" aria-current="page" href="./patientView.jsp">Patient</a>
-				  </li>
-				  <li class="nav-item">
-					<a class="nav-link" href="./staffView.jsp">Staff</a>
-				  </li>
-				  <li class="nav-item">
-					<a class="nav-link" href="./departments.jsp">Departments</a>
-				  </li>
-				  <li class="nav-item">
-					<a class="nav-link" href="./appointment.jsp">Appointment</a>
-				  </li>
-				</ul>
-				<ul class="navbar-nav ms-auto">
-					<li class="nav-item">
-						<a class="nav-link" href="./signupPage.jsp">SignOut</a>
-					</li>
-				</ul>
-			  </div>
+				<a class="navbar-brand font-weight-bold fs-4" href="homePage.jsp">Clinic Master</a>
+				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse" id="navbarText">
+					<ul class="navbar-nav w-100 d-flex justify-content-between">
+						<li class="nav-item flex-grow-1 text-center">
+							<a class="nav-link font-weight-bold fs-4 active" aria-current="page" href="./patientView.jsp">Patient</a>
+						</li>
+						<li class="nav-item flex-grow-1 text-center">
+							<a class="nav-link font-weight-bold fs-4 " href="./staffView.jsp">Staff</a>
+						</li>
+						<li class="nav-item flex-grow-1 text-center">
+							<a class="nav-link font-weight-bold fs-4" href="./departments.jsp">Departments</a>
+						</li>
+						<li class="nav-item flex-grow-1 text-center">
+							<a class="nav-link font-weight-bold fs-4" href="./appointment.jsp">Appointment</a>
+						</li>
+						<li class="nav-item flex-grow-1 text-center">
+							<a class="nav-link font-weight-bold fs-4" href="./signupPage.jsp">SignOut</a>
+						</li>
+					</ul>
+				</div>
 			</div>
-		</nav>
-		<div class="container d-flex justify-content-center align-items-center bg-primary-subtle card p-3">
+		</nav>	
+
+		<div class="container d-flex justify-content-center align-items-center bg-primary-subtle card p-3 mt-5">
 			<form action = "patientView.jsp" method = "GET">
 				<h2>Add Patient</h2>
 				<div class="mb-3">
@@ -56,8 +55,8 @@
 		<%
 		String db="clinicmaster"; 
 		String user; // assumes database name is the same as username 
-		  user = "hello";
-		String password = "Hello123!";
+		  user = "root";
+		String password = "root";
 		try 
 		{ 
 			if(request.getParameter("name") != null && request.getParameter("age")!= null && request.getParameter("address") != null&& request.getParameter("billingCard") != null)
