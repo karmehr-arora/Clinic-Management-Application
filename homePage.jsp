@@ -43,8 +43,8 @@
 				<div>
 					<h3>Signup/Login/Signout Functions</h3>
 					<ul>
-						<li>Allow users to create their own personal account and login via their personal information</li>
-						<li>SignOut functionality that will bring the user back to the Signup / Login page</li>
+						<li>Sign Up / Log in: Allow users to create their own personal account and login via their personal information</li>
+						<li>Sign Out: Functionality that will bring the user back to the Signup / Login page</li>
 					</ul>
 				</div>
 
@@ -52,6 +52,7 @@
 					<h3>Patient Functions</h3>
 					<ul>
 						<li>Add/Remove Patients: Users will be able to Add/Delete Patient instances</li>
+						<li>View/Edit Patients: Users will be able to View/Edit Patient instances in a tabular format</li>
 						<li>Pay Billing Card: Users will be able to make Payments for patients via this page</li>
 					</ul>
 				</div>
@@ -59,8 +60,10 @@
 				<div>
 					<h3>Staff Functions</h3>
 					<ul>
-						<li>Add/Remove Staff: Users will be able to Add/Delete Staff instances</li>
-						<li>Add/Remove/Edit/View Inventory: Staff can manipulate inventory.</li>
+						<li>Add/Remove/View Staff: Users will be able to Add/Delete Staff instances and see all instances in a tabular format</li>
+						<li>Add Inventory: Staff can add items directly into the system</li>
+						<li>Search Inventory: Staff can view specific items in the system via their name</li>
+						<li>View Inventory: Staff can view all the inventory available in the system in a tabular format</li>
 					</ul>
 				</div>
 
@@ -75,9 +78,9 @@
 				<div>
 					<h3>Appointment Functions</h3>
 					<ul>
-						<li>Book Appointment</li>
-						<li>View Appointment for Specific Patient</li>
-						<li>View all Appointments</li>
+						<li>Book Appointment: Allows Staff to create appointments for patients</li>
+						<li>View Appointment for Specific Patient: Allows for searching of Patients via their Patient ID</li>
+						<li>View/Delete Appointments: All Patient appointments shown in tabular format, deletion of appointments is possible </li>
 					</ul>
 				</div>
 			</div>
