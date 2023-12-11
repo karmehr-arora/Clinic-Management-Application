@@ -56,8 +56,8 @@
 		<%
 		String db="clinicmaster"; 
 		String user; // assumes database name is the same as username 
-		  user = "hello";
-		String password = "Hello123!";
+		  user = "root";
+		String password = "root";
 		try 
 		{ 
 			if(request.getParameter("name") != null && request.getParameter("age")!= null && request.getParameter("address") != null&& request.getParameter("billingCard") != null)
