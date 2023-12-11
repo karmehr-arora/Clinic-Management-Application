@@ -175,6 +175,26 @@ INSERT INTO `employs` VALUES (1,'Anesthesia','Medication','Medication Prescripti
 /*!40000 ALTER TABLE `employs` ENABLE KEYS */;
 UNLOCK TABLES;
 
+
+--
+-- Table structure for table 'enters'
+--
+
+DROP TABLE IF EXISTS `enters`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `enters` (
+  `userID` varchar(45) NOT NULL,
+  `staffID` int NOT NULL,
+  KEY `fk_enters_1_idx` (`userID`),
+  KEY `fk_enters_2_idx` (`staffID`),
+  CONSTRAINT `fk_enters_1` FOREIGN KEY (`userID`) REFERENCES `login` (`userID`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `fk_enters_2` FOREIGN KEY (`staffID`) REFERENCES `staff` (`staffID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+
+
 --
 -- Table structure for table `has`
 --
