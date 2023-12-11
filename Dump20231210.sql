@@ -20,7 +20,6 @@ USE `clinicmaster`;
 --
 -- Table structure for table `appointments`
 --
-
 DROP TABLE IF EXISTS `appointments`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
@@ -193,7 +192,17 @@ CREATE TABLE `enters` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
+--
+-- Dumping data for table `enters`
+--
 
+LOCK TABLES `enters` WRITE;
+/*!40000 ALTER TABLE `enters` DISABLE KEYS */;
+INSERT INTO `enters` VALUES ('123@123.com',10),('admin@gmail.com',2),('anthony@gmail.com',1),('philip@gmail.com',3),('Derrick@gmail.com',4),
+('Tyler@gmail.com',5),('Matthew@gmail.com',6), ('Geronimo@gmail.com', 7), ('Austin@gmail.com', 8), ('Sam@gmail.com',9), ('Robby@gmail.com',11),
+('Earl@gmail.com',12),('Brock@gmail.com',13),('Jalen@gmail.com',14),('kean@gmail.com',16);
+/*!40000 ALTER TABLE `enters` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `has`
@@ -297,7 +306,12 @@ CREATE TABLE `login` (
 
 LOCK TABLES `login` WRITE;
 /*!40000 ALTER TABLE `login` DISABLE KEYS */;
-INSERT INTO `login` VALUES ('123@123.com','12345678',1,'kean','lee','123 street',1),('admin@gmail.com','12345678',21,'Karmehr','Arora','12345 dreary lane',1);
+INSERT INTO `login` 
+VALUES ('123@123.com','12345678',1,'kean','lee','123 Street',1),('admin@gmail.com','12345678',21,'Karmehr','Arora','12345 Dreary Lane',1), ('anthony@gmail.com','12345678',21,'Anthony','briggs','54312 Tobler Ave',1),
+('philip@gmail.com','12345678',32,'Philip','Rivers','12635 Steen Rd',1), ('Derrick@gmail.com','12345678',28,'Derrick','Rose','10923 Fisher St',1), ('Tyler@gmail.com','12345678',44,'Tyler','Mace','1293 Tipper Lane',1),
+('Matthew@gmail.com','12345678',33,'Matthew','Dylan','125 Steel Lane',1), ('Geronimo@gmail.com','12345678',55,'Geronimo','Aldana','12938 Frantic St',1), ('Austin@gmail.com','12345678',66,'Austin','Reeves','163 Bascom Ave',1),
+('Sam@gmail.com','12345678',28,'Sam','Kerr','2309 Main St',1), ('Robby@gmail.com','12345678',38,'Robby','Gould','0239 Tesnor St',1), ('Earl@gmail.com','12345678',52,'Earl','Bridgewater','435 Saratoga Ave',1),
+('Brock@gmail.com','12345678',23,'Brock','Purdy','9023 Abbey Rd',1), ('Jalen@gmail.com','12345678',36,'Jalen','Hurts','2398 Cascade Rd',1), ('kean@gmail.com','12345678',58,'Kean','Taylor','2193 Bascome St',1);
 /*!40000 ALTER TABLE `login` ENABLE KEYS */;
 UNLOCK TABLES;
 
