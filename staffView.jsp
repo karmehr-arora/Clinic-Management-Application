@@ -26,7 +26,7 @@
 								<a class="nav-link font-weight-bold fs-4" href="./appointment.jsp">Appointment</a>
 							</li>
 							<li class="nav-item flex-grow-1 text-center">
-								<a class="nav-link font-weight-bold fs-4" href="./signupPage.jsp">SignOut</a>
+								<a class="nav-link font-weight-bold fs-4" href="./signupPage.jsp">Sign Out</a>
 							</li>
 						</ul>
 					</div>
@@ -178,9 +178,9 @@
 			<h2>Search Inventory</h2>
 			<form action ="staffView.jsp">
 				<input type = "text" name = "Item Name" class = "form-control" id = "Item Name" placeholder = "Item Name" size = "50">
+				<br>
 				<input type = "submit" class = "btn btn-primary" value = "See Item">
 			</form>
-	
 			<table class="table table-bordered">
 				<thead>
 				<tr>
@@ -196,13 +196,13 @@
 						java.sql.Connection con; 
 						Class.forName("com.mysql.jdbc.Driver");
 						con=DriverManager.getConnection("jdbc:mysql://localhost/" + db, user, password); 
-						Statement stmt3 = con.createStatement();
-						ResultSet rs3 = stmt3.executeQuery(String.format("SELECT * FROM inventory WHERE name = '%s' OR itemID = %d", request.getParameter("Item Name"), request.getParameter("Item Name")));
-						while (rs3.next()) {
-							out.println("<tr><td>"+rs3.getInt(1) + "</td><td>" + rs3.getString(2) + "</td><td>" + rs3.getInt(3) + "</td>");
+						Statement stmt2 = con.createStatement();
+						ResultSet rs2 = stmt2.executeQuery("SELECT * FROM inventory WHERE name LIKE '%" + request.getParameter("Item Name") + "%';");
+						while (rs2.next()) {
+							out.println("<tr><td>"+rs2.getInt(1) + "</td><td>" + rs2.getString(2) + "</td><td>" + rs2.getInt(3) + "</td>");
 						}
-						stmt3.close();
-                        rs3.close();
+						stmt2.close();
+                        rs2.close();
 						con.close();
 					} 
 					catch(SQLException e) 
@@ -234,7 +234,7 @@
 						Statement stmt3 = con.createStatement();
 						ResultSet rs3 = stmt3.executeQuery("SELECT * FROM inventory;");
 						while (rs3.next()) {
-							out.println("<tr><td>"+rs3.getInt(1) + "</td><td>" + rs3.getString(2) + "</td><td>" + rs3.getInt(3) + "</td>");
+							out.println("<tr><td>" + rs3.getInt(1) + "</td><td>" + rs3.getString(2) + "</td><td>" + rs3.getInt(3) + "</td>");
 						}
 						stmt3.close();
                         rs3.close();

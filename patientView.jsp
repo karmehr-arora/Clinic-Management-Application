@@ -26,7 +26,7 @@
 							<a class="nav-link font-weight-bold fs-4" href="./appointment.jsp">Appointment</a>
 						</li>
 						<li class="nav-item flex-grow-1 text-center">
-							<a class="nav-link font-weight-bold fs-4" href="./signupPage.jsp">SignOut</a>
+							<a class="nav-link font-weight-bold fs-4" href="./signupPage.jsp">Sign Out</a>
 						</li>
 					</ul>
 				</div>
