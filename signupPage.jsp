@@ -7,7 +7,6 @@
 	<body>
 		<nav class="navbar navbar-expand-lg bg-warning border border-dark">
 			<div class="container-fluid">
-				<a class="navbar-brand font-weight-bold fs-4" href="homePage.jsp">Clinic Master</a>
 				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
 					<span class="navbar-toggler-icon"></span>
 				</button>
@@ -17,7 +16,7 @@
 						<a class="nav-link font-weight-bold fs-4" href="./loginPage.jsp">Login</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link font-weight-bold fs-4" href="./signupPage.jsp">Signup</a>
+						<a class="nav-link font-weight-bold fs-4" href="./signupPage.jsp">Sign Up</a>
 					</li>
 				</ul>
 			</div>

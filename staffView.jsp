@@ -26,7 +26,7 @@
 								<a class="nav-link font-weight-bold fs-4" href="./appointment.jsp">Appointment</a>
 							</li>
 							<li class="nav-item flex-grow-1 text-center">
-								<a class="nav-link font-weight-bold fs-4" href="./signupPage.jsp">SignOut</a>
+								<a class="nav-link font-weight-bold fs-4" href="./signupPage.jsp">Sign Out</a>
 							</li>
 						</ul>
 					</div>
@@ -234,7 +234,7 @@
 						Statement stmt3 = con.createStatement();
 						ResultSet rs3 = stmt3.executeQuery("SELECT * FROM inventory;");
 						while (rs3.next()) {
-							out.println("<tr><td>" + rs3.getInt(1) + "</td><td>" + rs3.getString(2) + "</td><td>" + rs3.getInt(3)+ "</td><td><form action = 'staffView.jsp' method = 'GET'><input type='submit' class = 'btn btn-danger' name = 'delete_item' value = 'Delete'/><input type='hidden' name = 'itemID' value = "+rs3.getInt(1)+ "></form></td></tr>");
+							out.println("<tr><td>" + rs3.getInt(1) + "</td><td>" + rs3.getString(2) + "</td><td>" + rs3.getInt(3) + "</td>");
 						}
 						stmt3.close();
                         rs3.close();
